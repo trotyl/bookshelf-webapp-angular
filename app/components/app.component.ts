@@ -7,6 +7,7 @@ import { BookListComponent } from './book-list.component';
 import { BookDetailComponent } from './book-detail.component';
 import { BookCreateComponent } from './book-create.component';
 import { BookService } from '../services/book.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
     selector: 'app',
@@ -18,7 +19,7 @@ import { BookService } from '../services/book.service';
         <footer></footer>
     `,
     directives: [ NavbarComponent, FooterComponent, RouterOutlet ],
-    providers: [ ROUTER_PROVIDERS, HTTP_PROVIDERS, BookService ]
+    providers: [ ROUTER_PROVIDERS, HTTP_PROVIDERS, BookService, CategoryService ]
 })
 @RouteConfig([
     { path: '/', name: 'BookList', component: BookListComponent },
