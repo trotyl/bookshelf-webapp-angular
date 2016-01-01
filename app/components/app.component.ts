@@ -4,14 +4,18 @@ import { NavbarComponent } from './navbar.component';
 import { BookListComponent } from "./book-list.component";
 import { BookDetailComponent } from './book-detail.component';
 import { BookCreateComponent } from './book-create.component';
+import { BookService } from "../services/book.service";
 
 @Component({
     selector: 'app',
     template: `
         <navbar></navbar>
-        <router-outlet></router-outlet>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
     `,
-    directives: [ NavbarComponent, RouterOutlet ]
+    directives: [ NavbarComponent, RouterOutlet ],
+    providers: [ BookService ]
 })
 @RouteConfig([
     { path: '/', name: 'BookList', component: BookListComponent },
