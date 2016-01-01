@@ -49,6 +49,6 @@ import { Component } from 'angular2/core';
         </nav>
     `
 })
-export class Navbar {
+export class NavbarComponent {
 
 }

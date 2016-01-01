@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { Navbar } from 'app/navbar';
+import { NavbarComponent } from 'app/navbar.component';
 
 @Component({
     selector: 'app',
@@ -7,8 +7,8 @@ import { Navbar } from 'app/navbar';
         <navbar></navbar>
         <h1>Trotyl's Bookshelf</h1>
     `,
-    directives: [ Navbar ]
+    directives: [ NavbarComponent ]
 })
-export class App {
+export class AppComponent {
 
 }
