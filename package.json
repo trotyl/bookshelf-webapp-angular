@@ -4,6 +4,10 @@
   "description": "A exercise of front-end part powered by angular2 of bookshelf project in ThoughtWorks lecture.",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
     "test": "gulp test"
   },
   "repository": {
