@@ -1,14 +1,19 @@
 import { Component } from 'angular2/core';
-import { NavbarComponent } from 'app/navbar.component';
+import { RouterOutlet, RouteConfig } from "angular2/router";
+import { NavbarComponent } from './navbar.component';
+import { BooksTableComponent } from "./books_table.component";
 
 @Component({
     selector: 'app',
     template: `
         <navbar></navbar>
-        <h1>Trotyl's Bookshelf</h1>
+        <router-outlet></router-outlet>
     `,
-    directives: [ NavbarComponent ]
+    directives: [ NavbarComponent, RouterOutlet ]
 })
+@RouteConfig([
+    { path: '/', name: 'BooksTable', component: BooksTableComponent }
+])
 export class AppComponent {
 
 }
