@@ -78,5 +78,5 @@ node_modules
 
 
 ### User Defined
-app/*.js
-app/*.map
+app/**/*.js
+app/**/*.map
