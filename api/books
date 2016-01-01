@@ -1,0 +1,6 @@
+[
+  { "isbn": "9787302380979", "title": "CLR via C#", "author": ["Jeffrey Richter"], "category": { "id": 0, "name": "Computer & Technology" }, "price": 59.99 },
+  { "isbn": "9781617291340", "title": "C# in Depth", "author": ["Jon Skeet"], "category": { "id": 0, "name": "Computer & Technology" }, "price": 33.98 },
+  { "isbn": "9780321714114", "title": "C++ Primer", "author": ["Stanley B. Lippman", "Josée Lajoie", "Barbara E. Moo"], "category": { "id": 0, "name": "Computer & Technology" }, "price": 43.74 },
+  { "isbn": "8601300201986", "title": "Effective Java", "author": ["Joshua Bloch"], "category": { "id": 0, "name": "Computer & Technology" }, "price": 29.69 }
+]

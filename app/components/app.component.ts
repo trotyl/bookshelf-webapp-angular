@@ -1,5 +1,6 @@
 import { Component } from 'angular2/core';
-import { RouterOutlet, RouteConfig } from 'angular2/router';
+import { ROUTER_PROVIDERS, RouterOutlet, RouteConfig } from 'angular2/router';
+import { HTTP_PROVIDERS } from 'angular2/http';
 import { NavbarComponent } from './navbar.component';
 import { FooterComponent } from './footer.component';
 import { BookListComponent } from './book-list.component';
@@ -17,7 +18,7 @@ import { BookService } from '../services/book.service';
         <footer></footer>
     `,
     directives: [ NavbarComponent, FooterComponent, RouterOutlet ],
-    providers: [ BookService ]
+    providers: [ ROUTER_PROVIDERS, HTTP_PROVIDERS, BookService ]
 })
 @RouteConfig([
     { path: '/', name: 'BookList', component: BookListComponent },

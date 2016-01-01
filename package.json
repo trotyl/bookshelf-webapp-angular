@@ -6,8 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "live": "live-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run live\" ",
     "test": "gulp test"
   },
   "repository": {
@@ -39,6 +39,7 @@
   "devDependencies": {
     "concurrently": "^1.0.0",
     "lite-server": "^1.3.2",
+    "live-server": "^0.9.0",
     "typescript": "^1.7.5"
   }
 }
