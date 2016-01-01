@@ -1,0 +1,24 @@
+{
+  "name": "bookshelf-webapp-angular",
+  "version": "0.0.1",
+  "description": "A exercise of front-end part powered by angular2 of bookshelf project in ThoughtWorks lecture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trotyl/bookshelf-webapp-angular.git"
+  },
+  "keywords": [
+    "angular",
+    "angular 2",
+    "bookshelf"
+  ],
+  "author": "Trotyl <trotyl@qq.com> (http://trotyl.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trotyl/bookshelf-webapp-angular/issues"
+  },
+  "homepage": "https://github.com/trotyl/bookshelf-webapp-angular#readme"
+}
