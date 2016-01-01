@@ -24,7 +24,7 @@ import { RouterLink } from "angular2/router";
                             <a [routerLink]="['BookList']">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li>
-                            <a href="#">Create Book</a>
+                            <a [routerLink]="['BookCreate']">Create Book</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
