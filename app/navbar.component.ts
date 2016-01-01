@@ -1,4 +1,5 @@
 import { Component } from 'angular2/core';
+import { RouterLink } from "angular2/router";
 
 @Component({
     selector: 'navbar',
@@ -13,14 +14,18 @@ import { Component } from 'angular2/core';
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Trotyl's Bookshelf</a>
+                    <a class="navbar-brand" [routerLink]="['BookList']">Trotyl's Bookshelf</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Create Book</a></li>
+                        <li class="active">
+                            <a [routerLink]="['BookList']">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Create Book</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -47,7 +52,8 @@ import { Component } from 'angular2/core';
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-    `
+    `,
+    directives: [ RouterLink ]
 })
 export class NavbarComponent {
 

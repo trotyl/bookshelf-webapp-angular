@@ -1,7 +1,8 @@
 import { Component } from 'angular2/core';
 import { RouterOutlet, RouteConfig } from "angular2/router";
 import { NavbarComponent } from './navbar.component';
-import { BooksTableComponent } from "./books_table.component";
+import { BookListComponent } from "./book-list.component";
+import { BookDetailComponent } from './book-detail.component';
 
 @Component({
     selector: 'app',
@@ -12,7 +13,8 @@ import { BooksTableComponent } from "./books_table.component";
     directives: [ NavbarComponent, RouterOutlet ]
 })
 @RouteConfig([
-    { path: '/', name: 'BooksTable', component: BooksTableComponent }
+    { path: '/', name: 'BookList', component: BookListComponent },
+    { path: '/books/:id', name: 'BookDetail', component: BookDetailComponent }
 ])
 export class AppComponent {
 
