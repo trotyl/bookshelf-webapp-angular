@@ -1,10 +1,11 @@
 import { Component } from 'angular2/core';
-import { RouterOutlet, RouteConfig } from "angular2/router";
+import { RouterOutlet, RouteConfig } from 'angular2/router';
 import { NavbarComponent } from './navbar.component';
-import { BookListComponent } from "./book-list.component";
+import { FooterComponent } from './footer.component';
+import { BookListComponent } from './book-list.component';
 import { BookDetailComponent } from './book-detail.component';
 import { BookCreateComponent } from './book-create.component';
-import { BookService } from "../services/book.service";
+import { BookService } from '../services/book.service';
 
 @Component({
     selector: 'app',
@@ -13,8 +14,9 @@ import { BookService } from "../services/book.service";
         <div class="container">
             <router-outlet></router-outlet>
         </div>
+        <footer></footer>
     `,
-    directives: [ NavbarComponent, RouterOutlet ],
+    directives: [ NavbarComponent, FooterComponent, RouterOutlet ],
     providers: [ BookService ]
 })
 @RouteConfig([

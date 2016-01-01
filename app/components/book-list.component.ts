@@ -1,7 +1,7 @@
 import { Component, Input } from 'angular2/core';
-import { NgFor } from "angular2/common";
-import { BookService } from "../services/book.service";
-import { Book } from "../models/book";
+import { NgFor } from 'angular2/common';
+import { BookService } from '../services/book.service';
+import { Book } from '../models/book';
 
 @Component({
     selector: 'book-list',
