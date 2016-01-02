@@ -1,5 +1,8 @@
 import { Component } from 'angular2/core';
-import { RouterLink } from 'angular2/router';
+import { COMMON_DIRECTIVES } from 'angular2/common';
+import { ROUTER_DIRECTIVES } from 'angular2/router';
+import { CategoryService } from '../services/category.service';
+import { Category } from '../models/category';
 
 @Component({
     selector: 'navbar',
@@ -29,10 +32,7 @@ import { RouterLink } from 'angular2/router';
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Arts & Photography</a></li>
-                                <li><a href="#">Biographies & Memoirs</a></li>
-                                <li><a href="#">Business & Money</a></li>
-                                <li><a href="#">Computer & Technology</a></li>
+                                <li *ngFor="#category of categories"><a href="#">{{ category?.name }}</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">All</a></li>
                             </ul>
@@ -53,8 +53,12 @@ import { RouterLink } from 'angular2/router';
             </div><!-- /.container-fluid -->
         </nav>
     `,
-    directives: [ RouterLink ]
+    directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES ]
 })
 export class NavbarComponent {
+    private categories: Category[];
 
+    constructor(private categoryService: CategoryService) {
+        categoryService.getCategories().subscribe(categories => this.categories = categories);
+    }
 }
