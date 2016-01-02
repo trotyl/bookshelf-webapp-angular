@@ -22,10 +22,10 @@ import { CategoryService } from '../services/category.service';
     providers: [ ROUTER_PROVIDERS, HTTP_PROVIDERS, BookService, CategoryService ]
 })
 @RouteConfig([
-    { path: '/', name: 'BookList', component: BookListComponent },
+    { path: '/', name: 'BookList', component: BookListComponent, useAsDefault: true },
+    { path: '/pages/:page', name: 'BookListPage', component: BookListComponent },
     { path: '/books/:isbn', name: 'BookDetail', component: BookDetailComponent },
-    { path: '/create', name: 'BookCreate', component: BookCreateComponent },
-    { path: '/pages/:page', name: 'BookListPage', component: BookListComponent }
+    { path: '/create', name: 'BookCreate', component: BookCreateComponent }
 ])
 export class AppComponent {
 

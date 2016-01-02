@@ -1,6 +1,6 @@
 import { Component, Input } from 'angular2/core';
-import { NgFor } from 'angular2/common';
-import { Router, RouterLink, Location, RouteParams } from 'angular2/router';
+import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Router, RouterLink, Location, RouteParams, RouteConfig } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
 import { BookService } from '../services/book.service';
 import { Book } from '../models/book';
@@ -36,8 +36,9 @@ import { RangePipe } from '../pipes/range.pipe';
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li *ngFor="#page of pages | range">
-                <a [routerLink]="['BookListPage', { page: page }]">{{ page + 1 }}</a>
+            <li *ngFor="#page of pages | range:1">
+                <a *ngIf="page == 1" [routerLink]="['BookList']">{{ page }}</a>
+                <a *ngIf="page > 1" [routerLink]="['BookListPage', { page: page }]">{{ page }}</a>
             </li>
             <li>
               <a href="#" aria-label="Next">
@@ -47,7 +48,7 @@ import { RangePipe } from '../pipes/range.pipe';
           </ul>
         </nav>
     `,
-    directives: [ NgFor, RouterLink ],
+    directives: [ COMMON_DIRECTIVES, RouterLink ],
     pipes: [ RangePipe ]
 })
 export class BookListComponent {
@@ -56,9 +57,9 @@ export class BookListComponent {
     private currentPage: number;
 
     constructor(private router: Router, private location: Location, private params: RouteParams, private bookService: BookService) {
-        var page = params.get('page') || 0;
+        var page = params.get('page') || 1;
 
-        bookService.getBooks(page as number * 10).subscribe(books => this.books = books);
+        bookService.getBooks((page as number - 1) * 10).subscribe(books => this.books = books);
         bookService.getNumberOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
     }
 }
