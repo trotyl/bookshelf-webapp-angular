@@ -199,5 +199,41 @@ var categories = [
     { 
         "id": "0",
         "name": "Computer & Technology" 
+    },
+    {
+        "id": "1",
+        "name": "Arts & Photography"
+    },
+    {
+        "id": "2",
+        "name": "Biographies & Memoirs"
+    },
+    {
+        "id": "3",
+        "name": "Business & Money"
+    },
+    {
+        "id": "4",
+        "name": "Christian Books & Bibles"
+    },
+    {
+        "id": "5",
+        "name": "Comics & Graphic Novels"
+    },
+    {
+        "id": "6",
+        "name": "Cookbooks, Food & Wine"
+    },
+    {
+        "id": "7",
+        "name": "Crafts, Hobbies & Home"
+    },
+    {
+        "id": "8",
+        "name": "Education & Teaching"
+    },
+    {
+        "id": "9",
+        "name": "Engineering & Transportation"
     }
 ];
