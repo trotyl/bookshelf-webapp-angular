@@ -9,7 +9,7 @@ import { RangePipe } from '../pipes/range.pipe';
         <nav class="text-center">
           <ul class="pagination">
             <li [ngClass]="{ disabled: current <= 1 }">
-              <a [routerLink]="current > 2 ? ['BookListPage', { page: page }] : ['BookList']" aria-label="Previous">
+              <a [routerLink]="current > 2 ? ['BookListPage', { page: current - 1 }] : ['BookList']" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -17,7 +17,7 @@ import { RangePipe } from '../pipes/range.pipe';
                 <a [routerLink]="page > 1 ? ['BookListPage', { page: page }] : ['BookList']">{{ page }}</a>
             </li>
             <li [ngClass]="{ disabled: current >= total }">
-              <a href="#" aria-label="Next">
+              <a [routerLink]="['BookListPage', { page: current + 1 }]" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
