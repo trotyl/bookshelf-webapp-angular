@@ -3,6 +3,7 @@ import { NgFor } from 'angular2/common';
 import { Observable } from 'rxjs/Observable';
 import { BookService } from '../services/book.service';
 import { Book } from '../models/book';
+import { RangePipe } from '../pipes/range.pipe';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Book } from '../models/book';
                 <th>Price</th>
             </thead>
             <tbody>
-                <tr *ngFor="#book of books | async">
+                <tr *ngFor="#book of books">
                     <td>{{ book?.isbn }}</td>
                     <td>{{ book?.title }}</td>
                     <td>{{ book?.author }}</td>
@@ -34,11 +35,7 @@ import { Book } from '../models/book';
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            <li *ngFor="#page of pages | range"><a href="#">{{ page + 1 }}</a></li>
             <li>
               <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -47,12 +44,16 @@ import { Book } from '../models/book';
           </ul>
         </nav>
     `,
-    directives: [ NgFor ]
+    directives: [ NgFor ],
+    pipes: [ RangePipe ]
 })
 export class BookListComponent {
-    private books: Observable<Book[]>;
+    private books: Book[];
+    private pages: number;
+    private currentPage: number;
 
     constructor(private bookService: BookService) {
-        this.books = bookService.getBooks();
+        bookService.getBooks().subscribe(books => this.books = books);
+        bookService.getNumberOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
     }
 }

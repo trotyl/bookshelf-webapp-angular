@@ -18,4 +18,8 @@ export class BookService {
     getBooks(start: number = 0, amount: number = 10): Observable<Book[]> {
         return this.books.map(books => books.filter((_, i) => i >= start && i < start + amount));
     }
+
+    getNumberOfBooks(): Observable<number> {
+        return this.books.map(books => books.length);
+    }
 }
