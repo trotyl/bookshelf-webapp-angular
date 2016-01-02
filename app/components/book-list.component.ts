@@ -1,6 +1,6 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, OnInit } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
-import { RouteParams } from 'angular2/router';
+import { RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
 import { PaginationComponent } from './pagination.component';
 import { BookService } from '../services/book.service';
@@ -32,15 +32,26 @@ import { Book } from '../models/book';
     `,
     directives: [ COMMON_DIRECTIVES, PaginationComponent ]
 })
-export class BookListComponent {
+export class BookListComponent implements CanReuse, OnReuse, OnInit {
     private books: Book[];
     private pages: number;
     private currentPage: number;
 
     constructor(private params: RouteParams, private bookService: BookService) {
-        this.currentPage = params.get('page') as number || 1;
+        this.currentPage = parseInt(params.get('page')) || 1;
+    }
 
-        bookService.getBooks((this.currentPage - 1) * 10).subscribe(books => this.books = books);
-        bookService.getNumberOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
+    ngOnInit() {
+        this.bookService.getBooks((this.currentPage - 1) * 10).subscribe(books => this.books = books);
+        this.bookService.getNumberOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
+    }
+
+    routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction) {
+        return true;
+    }
+
+    routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) {
+        this.currentPage = parseInt(next.params['page']) || 1;
+        this.ngOnInit();
     }
 }
