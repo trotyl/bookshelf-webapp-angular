@@ -23,8 +23,9 @@ import { CategoryService } from '../services/category.service';
 })
 @RouteConfig([
     { path: '/', name: 'BookList', component: BookListComponent },
-    { path: '/books/:id', name: 'BookDetail', component: BookDetailComponent },
-    { path: '/create', name: 'BookCreate', component: BookCreateComponent }
+    { path: '/books/:isbn', name: 'BookDetail', component: BookDetailComponent },
+    { path: '/create', name: 'BookCreate', component: BookCreateComponent },
+    { path: '/pages/:page', name: 'BookListPage', component: BookListComponent }
 ])
 export class AppComponent {
 
