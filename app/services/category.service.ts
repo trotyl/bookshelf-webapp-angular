@@ -8,10 +8,4 @@ import { Category } from '../models/category';
 @Injectable()
 export class CategoryService {
 
-    getCategoryById(id: number): Category {
-        return {
-            id: id,
-            name: 'Computer & Technology'
-        };
-    }
 }

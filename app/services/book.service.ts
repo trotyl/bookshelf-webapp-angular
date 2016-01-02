@@ -12,21 +12,10 @@ export class BookService {
 
     constructor(private http: Http, private categoryService: CategoryService) {
         this.books = http.get('/api/books')
-            .map(res => res.json())
-            .map(arr => arr.map(raw => this.parseBook(raw as any)));
+            .map(res => res.json());
     }
 
     getBooks(start: number = 0, amount: number = 10): Observable<Book[]> {
         return this.books.map(books => books.filter((_, i) => i >= start && i < start + amount));
-    }
-
-    parseBook(raw: {isbn: string, title: string, author: string[], categoryId: number, price: number}): Book {
-        return {
-            isbn: raw.isbn,
-            title: raw.title,
-            author: raw.author,
-            category: this.categoryService.getCategoryById(raw.categoryId),
-            price: raw.price
-        }
     }
 }
