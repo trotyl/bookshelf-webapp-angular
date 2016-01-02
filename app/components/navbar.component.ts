@@ -32,7 +32,7 @@ import { Category } from '../models/category';
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li *ngFor="#category of categories"><a href="#">{{ category?.name }}</a></li>
+                                <li *ngFor="#category of categories"><a [routerLink]="['BookCategory', { category: category.id }]">{{ category?.name }}</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">All</a></li>
                             </ul>
