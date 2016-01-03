@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-import { CategoryService } from '../services/category.service';
+import { CategoryService } from '../services/services';
 import { Category } from '../models/category';
 
 @Component({

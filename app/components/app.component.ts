@@ -8,8 +8,7 @@ import { BookDetailComponent } from './book-detail.component';
 import { BookEditComponent } from './book-edit.component';
 import { BookCategoryComponent } from './book-category.component';
 import { BookCreateComponent } from './book-create.component';
-import { BookService } from '../services/book.service';
-import { CategoryService } from '../services/category.service';
+import { BookService, CategoryService } from '../services/services';
 
 @Component({
     selector: 'app',
