@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/from';
 import { Book } from "../models/book";
 import { Category } from '../models/category';
 
@@ -21,11 +20,15 @@ export class CategoryService {
     }
 
     getCategories(): Observable<Category[]> {
-        return this.observableCategories;
+        let observableCachedCategories: Observable<any> = this.cachedCategories && this.cachedCategories.size != 0 ?
+            Observable.of(Array.from(this.cachedCategories.values())) :
+            Observable.throw(new Error('Books not found in cache.'));
+
+        return observableCachedCategories.catch(() => this.observableCategories);
     }
 
     getCategory(id: string): Observable<Category> {
-        let observableCachedCategory: Observable<any> = this.cachedCategories.has(id) ?
+        let observableCachedCategory: Observable<any> = this.cachedCategories && this.cachedCategories.has(id) ?
             Observable.of(this.cachedCategories.get(id)) :
             Observable.throw(new Error('Category not found in cache.'));
 
