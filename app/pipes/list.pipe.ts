@@ -5,6 +5,6 @@ import { Pipe } from 'angular2/core';
 })
 export class ListPipe {
     transform(value: any[], args: number[]): string {
-        return value.join(', ')
+        return value instanceof Array ? value.join(', ') : '';
     }
 }
