@@ -3,6 +3,7 @@ import { FORM_DIRECTIVES } from 'angular2/common';
 import { RouteParams } from 'angular2/router';
 import { BookService } from '../services/book.service';
 import { Book } from '../models/book';
+import { ListPipe } from '../pipes/list.pipe';
 
 @Component({
     selector: 'book-detail',
@@ -19,11 +20,11 @@ import { Book } from '../models/book';
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author" [disabled]="true">
+                <input type="text" class="form-control" [ngModel]="book.author | list" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <input type="text" class="form-control" [ngModel]="book.category" [disabled]="true">
+                <input type="text" class="form-control" [ngModel]="book.category?.name" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Price</label>
@@ -32,7 +33,8 @@ import { Book } from '../models/book';
             <button type="submit" class="btn btn-default" *ngIf="false">Submit</button>
         </form>
     `,
-    directives: [ FORM_DIRECTIVES ]
+    directives: [ FORM_DIRECTIVES ],
+    pipes: [ ListPipe ]
 })
 export class BookDetailComponent {
     private book: Book = {
