@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var app = express();
 
@@ -7,6 +9,16 @@ var apiRouter = express.Router();
 
 apiRouter.get('/books', (req, res) => {
     res.json(books);
+});
+
+apiRouter.get('/books/:isbn', (req, res) => {
+    let isbn = req.params['isbn'];
+    let book = books.find(book => book.isbn == isbn);
+    if (book) {
+        res.json(book);
+    } else {
+        res.status(404).send();
+    }
 });
 
 apiRouter.get('/categories', (req, res) => {
