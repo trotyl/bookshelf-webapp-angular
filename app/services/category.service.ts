@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { Book } from "../models/book";
-import { Category } from '../models/category';
+import { Book, Category } from '../models/models';
 
 @Injectable()
 export class CategoryService {

@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES } from 'angular2/common';
 import { RouteParams } from 'angular2/router';
 import { BookService } from '../services/services';
-import { Book } from '../models/book';
+import { Book } from '../models/models';
 import { ListPipe } from '../pipes/pipes';
 
 @Component({

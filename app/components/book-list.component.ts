@@ -4,7 +4,7 @@ import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction
 import { Observable } from 'rxjs/Observable';
 import { PaginationComponent } from './components';
 import { BookService } from '../services/services';
-import { Book } from '../models/book';
+import { Book } from '../models/models';
 
 @Component({
     selector: 'book-list',
