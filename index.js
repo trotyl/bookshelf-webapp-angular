@@ -5,21 +5,21 @@ app.use(express.static(__dirname));
 
 var apiRouter = express.Router();
 
-apiRouter.get('/books', function(req, res) {
+apiRouter.get('/books', (req, res) => {
     res.json(books);
 });
 
-apiRouter.get('/categories', function (req, res) {
+apiRouter.get('/categories', (req, res) => {
     res.json(categories);
 });
 
 app.use('/api', apiRouter);
 
-app.get('/*', function (req, res) {
+app.get('/*', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(3000, () => {
     var host = server.address().address;
     var port = server.address().port;
 

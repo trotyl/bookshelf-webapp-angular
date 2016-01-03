@@ -27,8 +27,10 @@ export class BookService {
     }
 
     parseBooks(array: BookJson[]): Observable<Book[]> {
-        return Observable.zip(...array.map(json => this.categoryService.getCategory(json.categoryId)),
-            (...categories) => categories).map(categories => categories.map((category, i) => ({
+        let observableCatories = array.map(json => this.categoryService.getCategory(json.categoryId));
+
+        return Observable.zip(...observableCatories, (...categories) => categories)
+            .map(categories => categories.map((category, i) => ({
                 isbn: array[i].isbn,
                 title: array[i].title,
                 author: array[i].author,
