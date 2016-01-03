@@ -1,7 +1,7 @@
 import { Component, Input } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-import { RangePipe } from '../pipes/range.pipe';
+import { RangePipe } from '../pipes/pipes';
 
 @Component({
     selector: 'pagination',
