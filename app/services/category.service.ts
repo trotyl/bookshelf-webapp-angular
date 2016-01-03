@@ -1,8 +1,10 @@
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/from';
 import { Book } from "../models/book";
 import { Category } from '../models/category';
 
@@ -23,12 +25,10 @@ export class CategoryService {
     }
 
     getCategory(id: string): Observable<Category> {
-        return Observable.create(observer => {
-            if (this.cachedCategories.has(id)) {
-                observer.next(this.cachedCategories.get(id));
-            } else {
-                observer.error('Category not found in cache.');
-            }
-        }).catch(this.observableCategories.map(categories => categories.find(category => category.id == id)));
+        let observableCachedCategory: Observable<any> = this.cachedCategories.has(id) ?
+            Observable.of(this.cachedCategories.get(id)) :
+            Observable.throw(new Error('Category not found in cache.'));
+
+        return observableCachedCategory.catch(() => this.observableCategories.map(categories => categories.find(category => category.id == id)));
     }
 }
