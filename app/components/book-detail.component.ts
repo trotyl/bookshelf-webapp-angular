@@ -11,25 +11,25 @@ import { Book } from '../models/book';
         <form (ngSubmit)="onSubmit()" [ngClass]="{ disabled: true }">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" [ngModel]="book.isbn" placeholder="ISBN">
+                <input type="text" class="form-control" [ngModel]="book.isbn" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" [ngModel]="book.title" placeholder="Title">
+                <input type="text" class="form-control" [ngModel]="book.title" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author" placeholder="Title">
+                <input type="text" class="form-control" [ngModel]="book.author" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <input type="text" class="form-control" [ngModel]="book.category" placeholder="Title">
+                <input type="text" class="form-control" [ngModel]="book.category" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Price</label>
-                <input type="text" class="form-control" [ngModel]="book.price" placeholder="Title">
+                <input type="text" class="form-control" [ngModel]="book.price" [disabled]="true">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default" *ngIf="false">Submit</button>
         </form>
     `,
     directives: [ FORM_DIRECTIVES ]
