@@ -23,8 +23,4 @@ export class BookDetailComponent {
     constructor(private routeParams: RouteParams, private bookService: BookService) {
         this.isbn = routeParams.get('isbn');
     }
-
-    onSubmit() {
-
-    }
 }
