@@ -1,6 +1,9 @@
 import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES } from 'angular2/common';
 import { RouteParams } from 'angular2/router';
+import { Observable } from 'rxjs/Rx';
+import { BookEditComponent } from './book-edit.component';
+import { BookFormComponent } from './book-form.component';
 import { BookService } from '../services/services';
 import { Book } from '../models/models';
 import { ListPipe } from '../pipes/pipes';
@@ -8,6 +11,7 @@ import { ListPipe } from '../pipes/pipes';
 @Component({
     selector: 'book-detail',
     template: `
+        <!--<book-form></book-form>-->
         <div class="page-header"><h2>Book Detail</h2></div>
         <form (ngSubmit)="onSubmit()" [ngClass]="{ disabled: true }">
             <div class="form-group">
@@ -33,7 +37,7 @@ import { ListPipe } from '../pipes/pipes';
             <button type="submit" class="btn btn-default" *ngIf="false">Submit</button>
         </form>
     `,
-    directives: [ FORM_DIRECTIVES ],
+    directives: [ FORM_DIRECTIVES, BookFormComponent ],
     pipes: [ ListPipe ]
 })
 export class BookDetailComponent {

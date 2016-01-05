@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
-import { PaginationComponent } from './components';
+import { PaginationComponent } from './pagination.component';
 import { BookService } from '../services/services';
 import { Book } from '../models/models';
 
