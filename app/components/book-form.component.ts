@@ -1,8 +1,10 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, OnInit } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { FORM_DIRECTIVES } from 'angular2/common';
 import { Book } from '../models/models';
 import { ListPipe, SplitPipe } from '../pipes/pipes';
+import {Observable} from "rxjs/Observable";
+import {BookService} from "../services/book.service";
 
 @Component({
     selector: 'book-form',
@@ -18,7 +20,7 @@ import { ListPipe, SplitPipe } from '../pipes/pipes';
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="book.author = $event | split" [disabled]="true">
+                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="true">
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
@@ -32,13 +34,30 @@ import { ListPipe, SplitPipe } from '../pipes/pipes';
         </form>
     `,
     directives: [ COMMON_DIRECTIVES, FORM_DIRECTIVES ],
-    pipes: [ ListPipe, SplitPipe ]
+    pipes: [ ListPipe, SplitPipe ],
+    providers: [ SplitPipe ]
 })
-export class BookFormComponent {
-    //@Input() private book: Book;
+export class BookFormComponent implements OnInit {
+    private book: Book = {
+        isbn: undefined,
+        title: undefined,
+        author: undefined,
+        category: undefined,
+        price: undefined
+    };
 
-    constructor() {
+    @Input() private isbn: string;
 
+    constructor(private bookService: BookService, private splitPipe: SplitPipe) {
+
+    }
+
+    ngOnInit() {
+        this.bookService.getBook(this.isbn).subscribe(book => this.book = book);
+    }
+
+    onAuthorChange(author: string) {
+        this.book.author = this.splitPipe.transform(author, [',', true]);
     }
 
     onSubmit() {
