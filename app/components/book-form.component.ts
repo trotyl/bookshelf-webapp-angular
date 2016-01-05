@@ -12,25 +12,25 @@ import {BookService} from "../services/book.service";
         <form (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="true">
+                <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="disabled">
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" [(ngModel)]="book.title" [disabled]="true">
+                <input type="text" class="form-control" [(ngModel)]="book.title" [disabled]="disabled">
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="true">
+                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="disabled">
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <input type="text" class="form-control" [ngModel]="book.category?.name" [disabled]="true">
+                <input type="text" class="form-control" [ngModel]="book.category?.name" [disabled]="disabled">
             </div>
             <div class="form-group">
                 <label for="title">Price</label>
-                <input type="text" class="form-control" [(ngModel)]="book.price" [disabled]="true">
+                <input type="text" class="form-control" [(ngModel)]="book.price" [disabled]="disabled">
             </div>
-            <button type="submit" class="btn btn-default" *ngIf="false">Submit</button>
+            <button type="submit" class="btn btn-default" *ngIf="!disabled">Submit</button>
         </form>
     `,
     directives: [ COMMON_DIRECTIVES, FORM_DIRECTIVES ],
@@ -47,6 +47,7 @@ export class BookFormComponent implements OnInit {
     };
 
     @Input() private isbn: string;
+    private disabled: boolean = true;
 
     constructor(private bookService: BookService, private splitPipe: SplitPipe) {
 
