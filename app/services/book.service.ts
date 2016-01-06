@@ -82,6 +82,8 @@ export class BookService {
 
     updateBook(isbn: string, book: Book): Observable<boolean> {
         // Todo
+        console.log(book);
+        //this.http.put(`/api/books/${isbn}`, ``);
         return Observable.of(true);
     }
 }

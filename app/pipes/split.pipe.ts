@@ -5,7 +5,7 @@ import { Pipe } from 'angular2/core';
 })
 export class SplitPipe {
     transform(value: string, [ regex = ',', trim = true ]): string[] {
-        return value as any instanceof String ?
+        return value ?
             value.split(regex).map(part => part.trim()) :
             [];
     }

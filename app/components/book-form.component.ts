@@ -5,6 +5,8 @@ import { Book } from '../models/models';
 import { ListPipe, SplitPipe } from '../pipes/pipes';
 import {Observable} from "rxjs/Observable";
 import {BookService} from "../services/book.service";
+import {Category} from "../models/category";
+import {CategoryService} from "../services/category.service";
 
 @Component({
     selector: 'book-form',
@@ -24,7 +26,9 @@ import {BookService} from "../services/book.service";
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <input type="text" class="form-control" [ngModel]="book.category?.name" [disabled]="disabled">
+                <select class="form-control" [ngModel]="book.category?.id" (ngModelChange)="onCategoryChange($event)" [disabled]="disabled">
+                    <option *ngFor="#category of availableCategories" [value]="category.id">{{ category.name }}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="title">Price</label>
@@ -46,12 +50,14 @@ export class BookFormComponent implements OnInit {
         price: undefined
     };
 
+    private availableCategories: Category[] = [];
+
     @Input() private isbn: string;
     @Input() private disabled: boolean;
     @Output() private bookSubmit: EventEmitter<Book> = new EventEmitter();
 
-    constructor(private bookService: BookService, private splitPipe: SplitPipe) {
-
+    constructor(private bookService: BookService, private categoryService: CategoryService, private splitPipe: SplitPipe) {
+        categoryService.getCategories().subscribe(categories => this.availableCategories = categories);
     }
 
     ngOnInit() {
@@ -60,5 +66,10 @@ export class BookFormComponent implements OnInit {
 
     onAuthorChange(author: string) {
         this.book.author = this.splitPipe.transform(author, [',', true]);
+        console.log(this.book.author);
+    }
+
+    onCategoryChange(categoryId: string) {
+        this.categoryService.getCategory(categoryId).subscribe(category => this.book.category = category);
     }
 }
