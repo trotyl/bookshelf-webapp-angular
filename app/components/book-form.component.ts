@@ -9,7 +9,7 @@ import {BookService} from "../services/book.service";
 @Component({
     selector: 'book-form',
     template: `
-        <form (ngSubmit)="submit.emit(book)">
+        <form (ngSubmit)="bookSubmit.emit(book)">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
                 <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="disabled">
@@ -48,7 +48,7 @@ export class BookFormComponent implements OnInit {
 
     @Input() private isbn: string;
     @Input() private disabled: boolean;
-    @Output() private submit: EventEmitter<Book> = new EventEmitter();
+    @Output() private bookSubmit: EventEmitter<Book> = new EventEmitter();
 
     constructor(private bookService: BookService, private splitPipe: SplitPipe) {
 

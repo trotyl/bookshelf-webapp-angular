@@ -79,6 +79,11 @@ export class BookService {
     getAmountOfBooks(): Observable<number> {
         return this.observableBooks.map(books => books.length);
     }
+
+    updateBook(isbn: string, book: Book): Observable<boolean> {
+        // Todo
+        return Observable.of(true);
+    }
 }
 
 interface BookJson {
