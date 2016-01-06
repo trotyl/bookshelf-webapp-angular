@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from 'angular2/core';
+import { Component, Input, Output, OnInit, EventEmitter } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { FORM_DIRECTIVES } from 'angular2/common';
 import { Book } from '../models/models';
@@ -9,7 +9,7 @@ import {BookService} from "../services/book.service";
 @Component({
     selector: 'book-form',
     template: `
-        <form (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="submit.emit(book)">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
                 <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="disabled">
@@ -48,6 +48,7 @@ export class BookFormComponent implements OnInit {
 
     @Input() private isbn: string;
     @Input() private disabled: boolean;
+    @Output() private submit: EventEmitter<Book> = new EventEmitter();
 
     constructor(private bookService: BookService, private splitPipe: SplitPipe) {
 
@@ -59,9 +60,5 @@ export class BookFormComponent implements OnInit {
 
     onAuthorChange(author: string) {
         this.book.author = this.splitPipe.transform(author, [',', true]);
-    }
-
-    onSubmit() {
-
     }
 }
