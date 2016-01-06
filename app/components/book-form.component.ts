@@ -47,7 +47,7 @@ export class BookFormComponent implements OnInit {
     };
 
     @Input() private isbn: string;
-    private disabled: boolean = true;
+    @Input() private disabled: boolean;
 
     constructor(private bookService: BookService, private splitPipe: SplitPipe) {
 

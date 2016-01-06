@@ -12,7 +12,7 @@ import { ListPipe } from '../pipes/pipes';
     selector: 'book-detail',
     template: `
         <div class="page-header"><h2>Book Detail</h2></div>
-        <book-form [isbn]="isbn"></book-form>
+        <book-form [isbn]="isbn" [disabled]="true"></book-form>
     `,
     directives: [ FORM_DIRECTIVES, BookFormComponent ],
     pipes: [ ListPipe ]
