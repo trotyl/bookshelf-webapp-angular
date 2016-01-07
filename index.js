@@ -50,6 +50,19 @@ apiRouter.put('/books/:isbn', (req, res) => {
     }
 });
 
+apiRouter.delete('/books/:isbn', (req, res) => {
+    let isbn = req.params['isbn'];
+    let book = books.find(book => book.isbn == isbn);
+    if (book) {
+        console.log(`Deleted book ${isbn}.`);
+        books.splice(books.indexOf(book), 1);
+        setTimeout(() => res.status(204).send(), 1000);
+    } else {
+        console.log(`Not deleted book ${isbn}.`);
+        res.status(404).send();
+    }
+});
+
 apiRouter.get('/categories', (req, res) => {
     console.log(`Got categories.`);
     res.json(categories);
