@@ -1,6 +1,5 @@
 import { Component, OnInit } from 'angular2/core';
 import { RouteParams } from 'angular2/router';
-import { BookEditComponent } from './book-edit.component';
 import { BookFormComponent } from './book-form.component';
 import { Book } from "../models/book";
 import { BookService } from "../services/book.service";
