@@ -29,8 +29,9 @@ import { CategoryNamePipe } from "../pipes/category_name";
                     <td>{{ book.categoryId | categoryName | async }}</td>
                     <td>{{ book.price }}</td>
                     <td>
-                        <a [routerLink]="['/BookDetail', { isbn: book?.isbn }]">Detail</a>
-                        <a [routerLink]="['/BookEdit', { isbn: book?.isbn }]">Edit</a>
+                        <a [routerLink]="['/BookDetail', { isbn: book.isbn }]">Detail</a>
+                        <a [routerLink]="['/BookEdit', { isbn: book.isbn }]">Edit</a>
+                        <a (click)="deleteBook(book)">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -69,5 +70,15 @@ export class BookListComponent implements CanReuse, OnReuse, OnInit {
 
     pageLink(page: number): any[] {
         return page > 1 ? ['BookListPage', { page: page }] : ['BookList'];
+    }
+
+    deleteBook(book: Book): void {
+        if (confirm(`Are you sure to delete book <${book.title}> (${book.isbn})?`)) {
+            this.bookService.deleteBook(book.isbn).subscribe(res => {
+                this.ngOnInit();
+            }, res => {
+                console.log(res);
+            });
+        }
     }
 }

@@ -94,4 +94,8 @@ export class BookService {
             .map(res => res.json())
             .do(exists => !exists && this.cachedBooks.has(isbn) && this.cachedBooks.delete(isbn));
     }
+
+    deleteBook(isbn: string): Observable<Response> {
+        return this.http.delete(`/api/books/${isbn}`);
+    }
 }
