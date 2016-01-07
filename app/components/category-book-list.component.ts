@@ -48,14 +48,14 @@ export class CategoryBookListComponent implements OnInit {
     private books: Book[];
     private pages: number;
     private currentPage: number;
-    private pageLink: { (page: number): any[] } =
-        page => {
-            if (page <= 0) page = 1;
-            if (page >= this.pages) page = this.pages;
-            return page > 1 ?
-                ['CategoryBookListPage', { categoryId: this.categoryId, page: page }] :
-                ['CategoryBookList', { categoryId: this.categoryId }];
-        };
+
+    private pageLink: { (page: number): any[] } = page => {
+        if (page <= 0) page = 1;
+        if (page >= this.pages) page = this.pages;
+        return page > 1 ?
+            ['CategoryBookListPage', { categoryId: this.categoryId, page: page }] :
+            ['CategoryBookList', { categoryId: this.categoryId }];
+    };
 
     constructor(
         private params: RouteParams,
