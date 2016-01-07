@@ -1,13 +1,17 @@
 'use strict';
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.use(express.static(__dirname));
+app.use(bodyParser.json({}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var apiRouter = express.Router();
 
 apiRouter.get('/books', (req, res) => {
+    console.log('Got books.');
     res.json(books);
 });
 
@@ -15,8 +19,10 @@ apiRouter.get('/books/:isbn', (req, res) => {
     let isbn = req.params['isbn'];
     let book = books.find(book => book.isbn == isbn);
     if (book) {
+        console.log(`Got book ${isbn}.`);
         res.json(book);
     } else {
+        console.log(`Not got book ${isbn}.`);
         res.status(404).send();
     }
 });
@@ -24,17 +30,20 @@ apiRouter.get('/books/:isbn', (req, res) => {
 apiRouter.put('/books/:isbn', (req, res) => {
     let isbn = req.params['isbn'];
     let newBook = req.body;
-    console.log('Updated book in put: ', req.body);
+    console.log(newBook);
     let book = books.find(book => book.isbn == isbn);
     if (book) {
+        console.log(`Putted book ${isbn}.`);
         books.splice(books.indexOf(book), 1, newBook);
         setTimeout(() => res.status(204).send(), 1000);
     } else {
+        console.log(`Not putted book ${isbn}.`);
         res.status(404).send();
     }
 });
 
 apiRouter.get('/categories', (req, res) => {
+    console.log(`Got categories.`);
     res.json(categories);
 });
 
