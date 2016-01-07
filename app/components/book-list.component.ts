@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import { PaginationComponent } from './pagination.component';
-import { BookService, CategoryService } from '../services/services';
+import { BookService } from '../services/services';
 import { Book } from '../models/models';
 import { CategoryNamePipe } from "../pipes/category_name";
 
