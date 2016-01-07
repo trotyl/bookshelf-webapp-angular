@@ -76,6 +76,15 @@ export class BookService {
             });
     }
 
+    createBook(book: Book): Observable<Response> {
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        return this.http.post(`/api/books`, book.toJson(), { headers: headers })
+            .do(() => this.getSingleBookOnline(book.isbn).subscribe());
+    }
+
     checkBookExists(isbn: string): Observable<boolean> {
         return this.http.get(`/api/books/${isbn}/exists`)
             .map(res => res.json())

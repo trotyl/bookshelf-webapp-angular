@@ -36,15 +36,15 @@ export class BookEditComponent implements OnInit {
 
     updateBook(book: Book) {
         this.editable = false;
-        this.bookService.updateBook(this.isbn, book).subscribe(response => {
-            if (response.status >= 200 && response.status < 300) {
+        this.bookService.updateBook(this.isbn, book).subscribe(res => {
+            if (res.status >= 200 && res.status < 300) {
                 this.router.navigate(['BookDetail', { isbn: this.isbn }]);
             } else {
                 alert('Update book failed due to network problem!');
                 this.editable = true;
             }
-        }, response => {
-            console.log(response.status);
+        }, res => {
+            console.log(res.status);
             this.editable = true;
         });
     }
