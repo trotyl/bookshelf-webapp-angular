@@ -64,8 +64,8 @@ export class BookService {
             .map(books => books.filter(condition).filter((_, i) => i >= start && i < start + amount));
     }
 
-    getAmountOfBooks(): Observable<number> {
-        return this.observableBooks.map(books => books.length);
+    getAmountOfBooks(condition: { (book: Book): boolean } = () => true): Observable<number> {
+        return this.observableBooks.map(books => books.filter(condition).length);
     }
 
     updateBook(isbn: string, book: Book): Observable<Response> {

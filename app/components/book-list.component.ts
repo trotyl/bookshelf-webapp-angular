@@ -35,7 +35,7 @@ import { CategoryNamePipe } from "../pipes/category_name";
                 </tr>
             </tbody>
         </table>
-        <pagination [current]="currentPage" [total]="pages"></pagination>
+        <pagination [current]="currentPage" [total]="pages" [pageLink]="pageLink"></pagination>
     `,
     directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES, PaginationComponent ],
     pipes: [ CategoryNamePipe ]
@@ -65,5 +65,9 @@ export class BookListComponent implements CanReuse, OnReuse, OnInit {
     routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) {
         this.currentPage = parseInt(next.params['page']) || 1;
         this.ngOnInit();
+    }
+
+    pageLink(page: number): any[] {
+        return page > 1 ? ['BookListPage', { page: page }] : ['BookList'];
     }
 }

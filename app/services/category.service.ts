@@ -18,7 +18,7 @@ export class CategoryService {
     }
 
     private getSingleCategoryOnline(id: string): Observable<Category> {
-        return this.http.get(`/api/categories${id}`)
+        return this.http.get(`/api/categories/${id}`)
             .map(res => res.json())
             .map(obj => Category.from(obj));
     }

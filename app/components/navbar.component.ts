@@ -24,17 +24,17 @@ import { Category } from '../models/models';
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a [routerLink]="['BookList']">Home <span class="sr-only">(current)</span></a>
+                            <a [routerLink]="['/BookList']">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li>
-                            <a [routerLink]="['BookCreate']">Create Book</a>
+                            <a [routerLink]="['/BookCreate']">Create Book</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li *ngFor="#category of categories"><a [routerLink]="['BookCategory', { category: category.id }]">{{ category?.name }}</a></li>
+                                <li *ngFor="#category of categories"><a [routerLink]="['/CategoryBook', 'CategoryBookList', { categoryId: category.id }]">{{ category.name }}</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">All</a></li>
+                                <li><a href="#">Manage</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -56,7 +56,7 @@ import { Category } from '../models/models';
     directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES ]
 })
 export class NavbarComponent {
-    private categories: Category[];
+    private categories: Category[] = [];
 
     constructor(private categoryService: CategoryService) {
         categoryService.getCategories().subscribe(categories => this.categories = categories);
