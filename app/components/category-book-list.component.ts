@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
-import { ROUTER_DIRECTIVES, Router, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
+import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
 import { PaginationComponent } from './pagination.component';
 import { CategoryNamePipe } from "../pipes/category_name";
 import {Book} from "../models/book";
@@ -36,7 +36,7 @@ import {BookService} from "../services/book.service";
                 </tr>
             </tbody>
         </table>
-        <pagination [current]="currentPage" [total]="pages" (pageTurn)="onPageTurn($event)"></pagination>
+        <pagination [current]="currentPage" [total]="pages" [pageLink]="pageLink"></pagination>
     `,
     directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES, PaginationComponent ],
     pipes: [ CategoryNamePipe ],
@@ -48,10 +48,17 @@ export class CategoryBookListComponent implements OnInit {
     private books: Book[];
     private pages: number;
     private currentPage: number;
+    private pageLink: { (page: number): any[] } =
+        page => {
+            if (page <= 0) page = 1;
+            if (page >= this.pages) page = this.pages;
+            return page > 1 ?
+                ['CategoryBookListPage', { categoryId: this.categoryId, page: page }] :
+                ['CategoryBookList', { categoryId: this.categoryId }];
+        };
 
     constructor(
         private params: RouteParams,
-        private router: Router,
         private bookService: BookService
     ) {}
 
@@ -60,12 +67,5 @@ export class CategoryBookListComponent implements OnInit {
         this.currentPage = parseInt(this.params.get('page')) || 1;
         this.bookService.getBooks((this.currentPage - 1) * 10, 10, book => book.categoryId == this.categoryId).subscribe(books => this.books = books);
         this.bookService.getAmountOfBooks(book => book.categoryId == this.categoryId).subscribe(num => this.pages = Math.floor(num / 10) + 1);
-    }
-
-    onPageTurn(page: number): void {
-        let link = page > 1 ?
-            ['CategoryBookListPage', { categoryId: this.categoryId, page: page }] :
-            ['CategoryBookList', { categoryId: this.categoryId }];
-        this.router.navigate(link);
     }
 }
