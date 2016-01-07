@@ -32,6 +32,7 @@ import {BookService} from "../services/book.service";
                     <td>
                         <a [routerLink]="['/BookDetail', { isbn: book?.isbn }]">Detail</a>
                         <a [routerLink]="['/BookEdit', { isbn: book?.isbn }]">Edit</a>
+                        <a (click)="deleteBook(book)">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -78,5 +79,15 @@ export class CategoryBookListComponent implements OnInit, CanReuse, OnReuse {
         this.categoryId = next.params['categoryId'];
         this.currentPage = parseInt(next.params['page']) || 1;
         this.ngOnInit();
+    }
+
+    deleteBook(book: Book): void {
+        if (confirm(`Are you sure to delete book <${book.title}> (${book.isbn})?`)) {
+            this.bookService.deleteBook(book.isbn).subscribe(res => {
+                this.ngOnInit();
+            }, res => {
+                console.log(res);
+            });
+        }
     }
 }
