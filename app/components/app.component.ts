@@ -15,7 +15,7 @@ import { CategoryBookComponent } from "./category-book.component";
     template: `
         <navbar></navbar>
         <div class="container">
-            <router-outlet></router-outlet>
+            <routerOutlet></routerOutlet>
         </div>
         <footer></footer>
     `,

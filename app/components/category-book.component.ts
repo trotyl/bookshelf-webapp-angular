@@ -5,7 +5,7 @@ import { CategoryBookListComponent } from "./category-book-list.component";
 @Component({
     selector: 'category',
     template: `
-        <router-outlet></router-outlet>
+        <routerOutlet></routerOutlet>
     `,
     directives: [ RouterOutlet ]
 })
