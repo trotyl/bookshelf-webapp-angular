@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 import { PaginationComponent } from './pagination.component';
-import { BookService } from '../services/services';
+import { BookService, CategoryService } from '../services/services';
 import { Book } from '../models/models';
+import { CategoryNamePipe } from "../pipes/category_name";
 
 @Component({
     selector: 'book-list',
@@ -21,11 +23,11 @@ import { Book } from '../models/models';
             </thead>
             <tbody>
                 <tr *ngFor="#book of books">
-                    <td>{{ book?.isbn }}</td>
-                    <td>{{ book?.title }}</td>
-                    <td>{{ book?.author }}</td>
-                    <td>{{ book?.category?.name }}</td>
-                    <td>{{ book?.price }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.categoryId | categoryName | async }}</td>
+                    <td>{{ book.price }}</td>
                     <td>
                         <a [routerLink]="['/BookDetail', { isbn: book?.isbn }]">Detail</a>
                         <a [routerLink]="['/BookEdit', { isbn: book?.isbn }]">Edit</a>
@@ -35,14 +37,15 @@ import { Book } from '../models/models';
         </table>
         <pagination [current]="currentPage" [total]="pages"></pagination>
     `,
-    directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES, PaginationComponent ]
+    directives: [ COMMON_DIRECTIVES, ROUTER_DIRECTIVES, PaginationComponent ],
+    pipes: [ CategoryNamePipe ]
 })
 export class BookListComponent implements CanReuse, OnReuse, OnInit {
     private books: Book[];
     private pages: number;
     private currentPage: number;
 
-    constructor(private params: RouteParams, private bookService: BookService) {
+    constructor(private params: RouteParams, private bookService: BookService, private categoryService: CategoryService) {
         this.currentPage = parseInt(params.get('page')) || 1;
     }
 
