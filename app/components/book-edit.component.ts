@@ -1,10 +1,8 @@
 import { Component, OnInit } from 'angular2/core';
 import { RouteParams, Router } from "angular2/router";
-import { Http } from "angular2/http";
 import { BookFormComponent } from "./book-form.component";
 import { Book } from "../models/models";
 import { BookService } from "../services/services";
-import { Observable } from "rxjs/Rx";
 
 @Component({
     selector: 'book-edit',
