@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { RouterOutlet, RouteConfig } from "angular2/router";
+import { ROUTER_DIRECTIVES, RouteConfig } from "angular2/router";
 import { CategoryBookListComponent } from "./category-book-list.component";
 
 @Component({
@@ -7,7 +7,7 @@ import { CategoryBookListComponent } from "./category-book-list.component";
     template: `
         <router-outlet></router-outlet>
     `,
-    directives: [ RouterOutlet ]
+    directives: [ ROUTER_DIRECTIVES ]
 })
 @RouteConfig([
     { path: '/:categoryId', name: 'CategoryBookList', component: CategoryBookListComponent, useAsDefault: true },
