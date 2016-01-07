@@ -10,6 +10,6 @@ export class CategoryNamePipe {
     constructor(private categoryService: CategoryService) {}
 
     transform(id: string, args: number[]): Observable<string> {
-        return this.categoryService.getCategory(id).map(category => category.name);
+        return this.categoryService.get(id).map(category => category.name);
     }
 }

@@ -55,7 +55,7 @@ export class BookFormComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.categoryService.getCategories().subscribe(categories => this.allCategories = categories);
+        this.categoryService.gets().subscribe(categories => this.allCategories = categories);
     }
 
     onAuthorChange(author: string) {

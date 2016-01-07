@@ -59,6 +59,6 @@ export class NavbarComponent {
     private categories: Category[] = [];
 
     constructor(private categoryService: CategoryService) {
-        categoryService.getCategories().subscribe(categories => this.categories = categories);
+        categoryService.gets().subscribe(categories => this.categories = categories);
     }
 }
