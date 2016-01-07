@@ -13,25 +13,23 @@ import { CategoryService } from './category.service';
 
 @Injectable()
 export class BookService {
-    private observableBooks: Observable<Book[]>;
-    private cachedBooks: Map<string, Book>;
 
-    constructor(private http: Http, private categoryService: CategoryService) {
-        this.cachedBooks = new Map<string, Book>();
-        this.getAllBooksOnline();
-        this.observableBooks = this.getAllBooksOffline()
-            .catch(() => this.getAllBooksOnline())
+    private cachedBooks: Map<string, Book> = new Map<string, Book>();
+    private observableBooks: Observable<Book[]> = this.getAllBooksOffline().catch(() => this.getAllBooksOnline());
+
+    constructor(private http: Http) {
+        this.getAllBooksOnline().subscribe(() => {});
     }
 
     private getSingleBookOnline(isbn: string): Observable<Book> {
         return this.http.get(`/api/books/${isbn}`)
             .map(res => res.json())
-            .mergeMap<Book>(json => this.parseBook(json))
+            .map(obj => Book.from(obj))
             .do(book => this.cachedBooks.set(book.isbn, book));
     }
 
     private getSingleBookOffine(isbn: string): Observable<Book> {
-        return this.cachedBooks && this.cachedBooks.has(isbn) ?
+        return this.cachedBooks.has(isbn) ?
             Observable.of(this.cachedBooks.get(isbn)) :
             Observable.throw<Book>(new Error('Book not found in cache.'));
     }
@@ -39,31 +37,14 @@ export class BookService {
     private getAllBooksOnline(): Observable<Book[]> {
         return this.http.get(`/api/books`)
             .map(res => res.json())
-            .mergeMap<Book[]>(array => this.parseBooks(array))
+            .map(objs => objs.map(obj => Book.from(obj)))
             .do(books => books.forEach(book => this.cachedBooks.set(book.isbn, book)));
     }
 
     private getAllBooksOffline(): Observable<Book[]> {
-        return this.cachedBooks && this.cachedBooks.size != 0 ?
+        return this.cachedBooks.size != 0 ?
             Observable.of(Array.from(this.cachedBooks.values())) :
             Observable.throw<Book[]>(new Error('Books not found in cache.'));
-    }
-
-    private parseBook(json: BookJson): Observable<Book> {
-        return this.categoryService.getCategory(json.categoryId)
-            .map(category => ({
-                isbn: json.isbn,
-                title: json.title,
-                author: json.author,
-                category: category,
-                price: json.price
-            }));
-    }
-
-    private parseBooks(array: BookJson[]): Observable<Book[]> {
-        let observablesOfBook = array.map(json => this.parseBook(json));
-
-        return Observable.zip(...observablesOfBook, (...books) => books);
     }
 
     getBook(isbn: string) {
@@ -81,14 +62,6 @@ export class BookService {
     }
 
     updateBook(isbn: string, book: Book): Observable<Response> {
-        return this.http.put(`/api/books/${isbn}`, JSON.stringify(book));
+        return this.http.put(`/api/books/${isbn}`, book.toJson());
     }
-}
-
-interface BookJson {
-    isbn: string,
-    title: string,
-    author: string[],
-    categoryId: string,
-    price: number
 }

@@ -26,8 +26,8 @@ import {CategoryService} from "../services/category.service";
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <select class="form-control" [ngModel]="book.category?.id" (ngModelChange)="onCategoryChange($event)" [disabled]="disabled">
-                    <option *ngFor="#category of availableCategories" [value]="category.id">{{ category.name }}</option>
+                <select class="form-control" [(ngModel)]="book.categoryId" [disabled]="disabled">
+                    <option *ngFor="#category of allCategories" [value]="category.id">{{ category.name }}</option>
                 </select>
             </div>
             <div class="form-group">
@@ -42,22 +42,15 @@ import {CategoryService} from "../services/category.service";
     providers: [ SplitPipe ]
 })
 export class BookFormComponent implements OnInit {
-    private book: Book = {
-        isbn: undefined,
-        title: undefined,
-        author: undefined,
-        category: undefined,
-        price: undefined
-    };
-
-    private availableCategories: Category[] = [];
+    private book: Book = Book.empty();
+    private allCategories: Category[] = [];
 
     @Input() private isbn: string;
     @Input() private disabled: boolean;
     @Output() private bookSubmit: EventEmitter<Book> = new EventEmitter();
 
     constructor(private bookService: BookService, private categoryService: CategoryService, private splitPipe: SplitPipe) {
-        categoryService.getCategories().subscribe(categories => this.availableCategories = categories);
+        categoryService.getCategories().subscribe(categories => this.allCategories = categories);
     }
 
     ngOnInit() {
@@ -67,9 +60,5 @@ export class BookFormComponent implements OnInit {
     onAuthorChange(author: string) {
         this.book.author = this.splitPipe.transform(author, [',', true]);
         console.log(this.book.author);
-    }
-
-    onCategoryChange(categoryId: string) {
-        this.categoryService.getCategory(categoryId).subscribe(category => this.book.category = category);
     }
 }
