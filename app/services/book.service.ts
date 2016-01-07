@@ -55,9 +55,13 @@ export class BookService {
             .catch(() => this.getSingleBookOnline(isbn));
     }
 
-    getBooks(start: number = 0, amount: number = 10): Observable<Book[]> {
+    getBooks(
+        start: number = 0,
+        amount: number = 10,
+        condition: { (book: Book): boolean } = () => true
+    ): Observable<Book[]> {
         return this.observableBooks
-            .map(books => books.filter((_, i) => i >= start && i < start + amount));
+            .map(books => books.filter(condition).filter((_, i) => i >= start && i < start + amount));
     }
 
     getAmountOfBooks(): Observable<number> {

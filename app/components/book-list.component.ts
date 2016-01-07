@@ -44,13 +44,17 @@ export class BookListComponent implements CanReuse, OnReuse, OnInit {
     private books: Book[];
     private pages: number;
     private currentPage: number;
+    private categoryId: string;
 
-    constructor(private params: RouteParams, private bookService: BookService, private categoryService: CategoryService) {
-        this.currentPage = parseInt(params.get('page')) || 1;
+    constructor(
+        private params: RouteParams,
+        private bookService: BookService
+    ) {
+        this.currentPage = parseInt(this.params.get('page')) || 1;
     }
 
     ngOnInit() {
-        this.bookService.getBooks((this.currentPage - 1) * 10).subscribe(books => this.books = books);
+        this.bookService.getBooks((this.currentPage - 1) * 10, 10).subscribe(books => this.books = books);
         this.bookService.getAmountOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
     }
 
