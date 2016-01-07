@@ -21,6 +21,10 @@ apiRouter.get('/books/:isbn', (req, res) => {
     }
 });
 
+apiRouter.put('/books/:isbn', (req, res) => {
+    setTimeout(() => res.status(204).send(), 2000);
+});
+
 apiRouter.get('/categories', (req, res) => {
     res.json(categories);
 });
