@@ -28,7 +28,7 @@ export class BookCreateComponent implements OnInit {
 
     createBook(book: Book): void {
         this.editable = false;
-        this.bookService.createBook(book).subscribe(res => {
+        this.bookService.create(book).subscribe(res => {
             if (res.status >= 200 && res.status < 300) {
                 this.router.navigate(['BookDetail', { isbn: book.isbn }]);
             } else {

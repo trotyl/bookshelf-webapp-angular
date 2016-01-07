@@ -15,47 +15,47 @@ import { CategoryService } from './category.service';
 export class BookService {
 
     private cachedBooks: Map<string, Book> = new Map<string, Book>();
-    private observableBooks: Observable<Book[]> = this.getAllBooksOffline()
-        .catch(() => this.getAllBooksOnline());
+    private observableBooks: Observable<Book[]> = this.getGroupOffline()
+        .catch(() => this.getGroupOnline());
 
     constructor(private http: Http) {
         Observable.of(0)
             .merge(Observable.interval(60000))
-            .mergeMap(() => this.getAllBooksOnline()).subscribe();
+            .mergeMap(() => this.getGroupOnline()).subscribe();
     }
 
-    private getSingleBookOnline(isbn: string): Observable<Book> {
+    private getOneOnline(isbn: string): Observable<Book> {
         return this.http.get(`/api/books/${isbn}`)
             .map(res => res.json())
             .map(obj => Book.from(obj))
             .do(book => this.cachedBooks.set(book.isbn, book));
     }
 
-    private getSingleBookOffine(isbn: string): Observable<Book> {
+    private getOneOffine(isbn: string): Observable<Book> {
         return this.cachedBooks.has(isbn) ?
             Observable.of(this.cachedBooks.get(isbn)) :
             Observable.throw<Book>(new Error('Book not found in cache.'));
     }
 
-    private getAllBooksOnline(): Observable<Book[]> {
+    private getGroupOnline(): Observable<Book[]> {
         return this.http.get(`/api/books`)
             .map(res => res.json())
             .map(objs => objs.map(obj => Book.from(obj)))
             .do(books => books.forEach(book => this.cachedBooks.set(book.isbn, book)));
     }
 
-    private getAllBooksOffline(): Observable<Book[]> {
+    private getGroupOffline(): Observable<Book[]> {
         return this.cachedBooks.size != 0 ?
             Observable.of(Array.from(this.cachedBooks.values())) :
             Observable.throw<Book[]>(new Error('Books not found in cache.'));
     }
 
-    getBook(isbn: string) {
-        return this.getSingleBookOffine(isbn)
-            .catch(() => this.getSingleBookOnline(isbn));
+    get(isbn: string) {
+        return this.getOneOffine(isbn)
+            .catch(() => this.getOneOnline(isbn));
     }
 
-    getBooks(
+    gets(
         start: number = 0,
         amount: number = 10,
         condition: { (book: Book): boolean } = () => true
@@ -64,38 +64,33 @@ export class BookService {
             .map(books => books.filter(condition).filter((_, i) => i >= start && i < start + amount));
     }
 
-    getAmountOfBooks(condition: { (book: Book): boolean } = () => true): Observable<number> {
+    getAmount(condition: { (book: Book): boolean } = () => true): Observable<number> {
         return this.observableBooks.map(books => books.filter(condition).length);
     }
 
-    updateBook(isbn: string, book: Book): Observable<Response> {
+    update(isbn: string, book: Book): Observable<Response> {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
 
         return this.http.put(`/api/books/${isbn}`, book.toJson(), { headers: headers})
             .do(() => {
-                this.getSingleBookOnline(book.isbn).subscribe();
-                isbn != book.isbn && this.checkBookExists(isbn);
+                isbn != book.isbn && this.cachedBooks.has(isbn) && this.cachedBooks.delete(isbn);
+                this.getOneOnline(book.isbn).subscribe();
             });
     }
 
-    createBook(book: Book): Observable<Response> {
+    create(book: Book): Observable<Response> {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
 
         return this.http.post(`/api/books`, book.toJson(), { headers: headers })
-            .do(() => this.getSingleBookOnline(book.isbn).subscribe());
+            .do(() => this.getOneOnline(book.isbn).subscribe());
     }
 
-    checkBookExists(isbn: string): Observable<boolean> {
-        return this.http.get(`/api/books/${isbn}/exists`)
-            .map(res => res.json())
-            .do(exists => !exists && this.cachedBooks.has(isbn) && this.cachedBooks.delete(isbn));
-    }
-
-    deleteBook(isbn: string): Observable<Response> {
-        return this.http.delete(`/api/books/${isbn}`);
+    remove(isbn: string): Observable<Response> {
+        return this.http.delete(`/api/books/${isbn}`)
+            .do(() => this.cachedBooks.has(isbn) && this.cachedBooks.delete(isbn));
     }
 }

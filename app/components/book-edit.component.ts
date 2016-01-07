@@ -28,7 +28,7 @@ export class BookEditComponent implements OnInit {
 
     ngOnInit() {
         this.isbn = this.routeParams.get('isbn');
-        this.bookService.getBook(this.isbn).subscribe(book => {
+        this.bookService.get(this.isbn).subscribe(book => {
             this.book = book;
             this.editable = true;
         });
@@ -36,7 +36,7 @@ export class BookEditComponent implements OnInit {
 
     updateBook(book: Book) {
         this.editable = false;
-        this.bookService.updateBook(this.isbn, book).subscribe(res => {
+        this.bookService.update(this.isbn, book).subscribe(res => {
             if (res.status >= 200 && res.status < 300) {
                 this.router.navigate(['BookDetail', { isbn: this.isbn }]);
             } else {

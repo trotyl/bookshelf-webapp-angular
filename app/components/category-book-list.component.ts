@@ -67,8 +67,8 @@ export class CategoryBookListComponent implements OnInit, CanReuse, OnReuse {
     }
 
     ngOnInit(): void {
-        this.bookService.getBooks((this.currentPage - 1) * 10, 10, book => book.categoryId == this.categoryId).subscribe(books => this.books = books);
-        this.bookService.getAmountOfBooks(book => book.categoryId == this.categoryId).subscribe(num => this.pages = Math.floor(num / 10) + 1);
+        this.bookService.gets((this.currentPage - 1) * 10, 10, book => book.categoryId == this.categoryId).subscribe(books => this.books = books);
+        this.bookService.getAmount(book => book.categoryId == this.categoryId).subscribe(num => this.pages = Math.floor(num / 10) + 1);
     }
 
     routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction): boolean {
@@ -83,7 +83,7 @@ export class CategoryBookListComponent implements OnInit, CanReuse, OnReuse {
 
     deleteBook(book: Book): void {
         if (confirm(`Are you sure to delete book <${book.title}> (${book.isbn})?`)) {
-            this.bookService.deleteBook(book.isbn).subscribe(res => {
+            this.bookService.remove(book.isbn).subscribe(res => {
                 this.ngOnInit();
             }, res => {
                 console.log(res);

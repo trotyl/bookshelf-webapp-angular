@@ -55,8 +55,8 @@ export class BookListComponent implements CanReuse, OnReuse, OnInit {
     }
 
     ngOnInit() {
-        this.bookService.getBooks((this.currentPage - 1) * 10, 10).subscribe(books => this.books = books);
-        this.bookService.getAmountOfBooks().subscribe(num => this.pages = Math.floor(num / 10) + 1);
+        this.bookService.gets((this.currentPage - 1) * 10, 10).subscribe(books => this.books = books);
+        this.bookService.getAmount().subscribe(num => this.pages = Math.floor(num / 10) + 1);
     }
 
     routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction) {
@@ -74,7 +74,7 @@ export class BookListComponent implements CanReuse, OnReuse, OnInit {
 
     deleteBook(book: Book): void {
         if (confirm(`Are you sure to delete book <${book.title}> (${book.isbn})?`)) {
-            this.bookService.deleteBook(book.isbn).subscribe(res => {
+            this.bookService.remove(book.isbn).subscribe(res => {
                 this.ngOnInit();
             }, res => {
                 console.log(res);

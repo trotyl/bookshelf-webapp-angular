@@ -24,6 +24,6 @@ export class BookDetailComponent implements OnInit {
 
     ngOnInit(): void {
         let isbn = this.routeParams.get('isbn');
-        this.bookService.getBook(isbn).subscribe(book => this.book = book);
+        this.bookService.get(isbn).subscribe(book => this.book = book);
     }
 }
