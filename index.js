@@ -15,6 +15,14 @@ apiRouter.get('/books', (req, res) => {
     res.json(books);
 });
 
+apiRouter.post('/books', (req, res) => {
+    let book = req.body;
+    console.log(book);
+    console.log(`Post book ${book}`);
+    books.push(book);
+    res.status(201).send();
+});
+
 apiRouter.get('/books/:isbn', (req, res) => {
     let isbn = req.params['isbn'];
     let book = books.find(book => book.isbn == isbn);
