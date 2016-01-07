@@ -3,8 +3,8 @@ import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteParams, CanReuse, OnReuse, ComponentInstruction } from 'angular2/router';
 import { PaginationComponent } from './pagination.component';
 import { CategoryNamePipe } from "../pipes/category_name";
-import {Book} from "../models/book";
-import {BookService} from "../services/book.service";
+import { Book } from "../models/book";
+import { BookService } from "../services/book.service";
 
 @Component({
     selector: 'category-book-list',
