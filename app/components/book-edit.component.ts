@@ -9,7 +9,7 @@ import { Observable } from "rxjs/Rx";
 @Component({
     selector: 'book-edit',
     template: `
-        <div class="page-header"><h2>Book Edit</h2></div>
+        <div class="page-header"><h2>Book Edit <small *ngIf="disabled">(Updating...)</small></h2></div>
         <book-form [isbn]="isbn" [disabled]="disabled" (bookSubmit)="updateBook($event)"></book-form>
     `,
     directives: [ BookFormComponent ]
@@ -25,7 +25,7 @@ export class BookEditComponent {
     updateBook(book: Book) {
         this.disabled = true;
         this.bookService.updateBook(this.isbn, book).subscribe(response => {
-            if (response.ok) {
+            if (response.status >= 200 && response.status < 300) {
                 this.router.navigate(['BookDetail', { isbn: this.isbn }]);
             } else {
                 alert('Update book failed due to network problem!');
