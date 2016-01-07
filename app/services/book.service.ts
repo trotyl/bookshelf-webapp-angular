@@ -15,7 +15,8 @@ import { CategoryService } from './category.service';
 export class BookService {
 
     private cachedBooks: Map<string, Book> = new Map<string, Book>();
-    private observableBooks: Observable<Book[]> = this.getAllBooksOffline().catch(() => this.getAllBooksOnline());
+    private observableBooks: Observable<Book[]> = this.getAllBooksOffline()
+        .catch(() => this.getAllBooksOnline());
 
     constructor(private http: Http) {
         this.getAllBooksOnline().subscribe(() => {});
