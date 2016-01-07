@@ -22,7 +22,16 @@ apiRouter.get('/books/:isbn', (req, res) => {
 });
 
 apiRouter.put('/books/:isbn', (req, res) => {
-    setTimeout(() => res.status(204).send(), 2000);
+    let isbn = req.params['isbn'];
+    let newBook = req.body;
+    console.log('Updated book in put: ', req.body);
+    let book = books.find(book => book.isbn == isbn);
+    if (book) {
+        books.splice(books.indexOf(book), 1, newBook);
+        setTimeout(() => res.status(204).send(), 1000);
+    } else {
+        res.status(404).send();
+    }
 });
 
 apiRouter.get('/categories', (req, res) => {

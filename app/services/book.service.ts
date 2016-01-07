@@ -19,7 +19,9 @@ export class BookService {
         .catch(() => this.getAllBooksOnline());
 
     constructor(private http: Http) {
-        this.getAllBooksOnline().subscribe(() => {});
+        Observable.of(0)
+            .merge(Observable.interval(60000))
+            .mergeMap(() => this.getAllBooksOnline()).subscribe();
     }
 
     private getSingleBookOnline(isbn: string): Observable<Book> {
@@ -63,6 +65,16 @@ export class BookService {
     }
 
     updateBook(isbn: string, book: Book): Observable<Response> {
-        return this.http.put(`/api/books/${isbn}`, book.toJson());
+        return this.http.put(`/api/books/${isbn}`, book.toJson())
+            .do(() => {
+                this.getSingleBookOnline(book.isbn).subscribe();
+                isbn != book.isbn && this.checkBookExists(isbn);
+            });
+    }
+
+    checkBookExists(isbn: string): Observable<boolean> {
+        return this.http.get(`/api/books/${isbn}/exists`)
+            .map(res => res.json())
+            .do(exists => !exists && this.cachedBooks.has(isbn) && this.cachedBooks.delete(isbn));
     }
 }
