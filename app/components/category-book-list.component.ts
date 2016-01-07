@@ -42,7 +42,7 @@ import {BookService} from "../services/book.service";
     pipes: [ CategoryNamePipe ],
     changeDetection: ChangeDetectionStrategy.Default
 })
-export class CategoryBookListComponent implements OnInit {
+export class CategoryBookListComponent implements OnInit, CanReuse, OnReuse {
 
     private categoryId: string;
     private books: Book[];
@@ -60,12 +60,23 @@ export class CategoryBookListComponent implements OnInit {
     constructor(
         private params: RouteParams,
         private bookService: BookService
-    ) {}
-
-    ngOnInit(): void {
+    ) {
         this.categoryId = this.params.get('categoryId');
         this.currentPage = parseInt(this.params.get('page')) || 1;
+    }
+
+    ngOnInit(): void {
         this.bookService.getBooks((this.currentPage - 1) * 10, 10, book => book.categoryId == this.categoryId).subscribe(books => this.books = books);
         this.bookService.getAmountOfBooks(book => book.categoryId == this.categoryId).subscribe(num => this.pages = Math.floor(num / 10) + 1);
+    }
+
+    routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction): boolean {
+        return true;
+    }
+
+    routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction): void {
+        this.categoryId = next.params['categoryId'];
+        this.currentPage = parseInt(next.params['page']) || 1;
+        this.ngOnInit();
     }
 }
