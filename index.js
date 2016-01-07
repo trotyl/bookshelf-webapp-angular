@@ -55,6 +55,18 @@ apiRouter.get('/categories', (req, res) => {
     res.json(categories);
 });
 
+apiRouter.get('/categories/:id', (req, res) => {
+    let id = req.params['id'];
+    let category = categories.find(category => category.id == id);
+    if (category) {
+        console.log(`Got category ${id}.`);
+        res.json(category);
+    } else {
+        console.log(`Not got category ${id}.`);
+        res.status(404).send();
+    }
+});
+
 app.use('/api', apiRouter);
 
 app.get('/*', (req, res) => {
