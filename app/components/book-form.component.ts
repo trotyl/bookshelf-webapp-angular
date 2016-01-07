@@ -3,10 +3,8 @@ import { COMMON_DIRECTIVES } from 'angular2/common';
 import { FORM_DIRECTIVES } from 'angular2/common';
 import { Book } from '../models/models';
 import { ListPipe, SplitPipe } from '../pipes/pipes';
-import {Observable} from "rxjs/Observable";
-import {BookService} from "../services/book.service";
-import {Category} from "../models/category";
-import {CategoryService} from "../services/category.service";
+import { Category } from "../models/category";
+import { CategoryService } from "../services/category.service";
 
 @Component({
     selector: 'book-form',
