@@ -24,13 +24,16 @@ export class BookEditComponent {
 
     updateBook(book: Book) {
         this.disabled = true;
-        this.bookService.updateBook(this.isbn, book).subscribe(result => {
-            if (result) {
+        this.bookService.updateBook(this.isbn, book).subscribe(response => {
+            if (response.ok) {
                 this.router.navigate(['BookDetail', { isbn: this.isbn }]);
             } else {
                 alert('Update book failed due to network problem!');
                 this.disabled = false;
             }
-        })
+        }, response => {
+            console.log(response.status);
+            this.disabled = false;
+        });
     }
 }

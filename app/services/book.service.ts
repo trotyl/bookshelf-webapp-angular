@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from 'angular2/core';
-import { Http } from 'angular2/http';
+import { Http, Response } from 'angular2/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip-static';
@@ -80,11 +80,8 @@ export class BookService {
         return this.observableBooks.map(books => books.length);
     }
 
-    updateBook(isbn: string, book: Book): Observable<boolean> {
-        // Todo
-        console.log(book);
-        //this.http.put(`/api/books/${isbn}`, ``);
-        return Observable.of(true);
+    updateBook(isbn: string, book: Book): Observable<Response> {
+        return this.http.put(`/api/books/${isbn}`, JSON.stringify(book));
     }
 }
 
