@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { ROUTER_PROVIDERS, RouterOutlet, RouteConfig } from 'angular2/router';
+import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig } from 'angular2/router';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { BookCreateComponent } from './book-create.component';
 import { BookDetailComponent } from './book-detail.component';
@@ -19,7 +19,7 @@ import { CategoryBookComponent } from "./category-book.component";
         </div>
         <footer></footer>
     `,
-    directives: [ NavbarComponent, FooterComponent, RouterOutlet ],
+    directives: [ ROUTER_DIRECTIVES, NavbarComponent, FooterComponent ],
     providers: [ ROUTER_PROVIDERS, HTTP_PROVIDERS, BookService, CategoryService ]
 })
 @RouteConfig([
