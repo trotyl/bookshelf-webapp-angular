@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { RangePipe } from '../pipes/pipes';
-import {ChangeDetectionStrategy} from "angular2/core";
+import { ChangeDetectionStrategy } from "angular2/core";
 
 @Component({
     selector: 'pagination',
