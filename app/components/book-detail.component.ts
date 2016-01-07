@@ -7,7 +7,7 @@ import { BookFormComponent } from './book-form.component';
     selector: 'book-detail',
     template: `
         <div class="page-header"><h2>Book Detail</h2></div>
-        <book-form [isbn]="isbn" [disabled]="true"></book-form>
+        <book-form [isbn]="isbn" [editable]="false"></book-form>
     `,
     directives: [ BookFormComponent ]
 })

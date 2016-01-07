@@ -14,27 +14,27 @@ import {CategoryService} from "../services/category.service";
         <form (ngSubmit)="bookSubmit.emit(book)">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="disabled">
+                <input type="text" class="form-control" [(ngModel)]="book.isbn" [disabled]="!editable">
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" [(ngModel)]="book.title" [disabled]="disabled">
+                <input type="text" class="form-control" [(ngModel)]="book.title" [disabled]="!editable">
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="disabled">
+                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="!editable">
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
-                <select class="form-control" [(ngModel)]="book.categoryId" [disabled]="disabled">
+                <select class="form-control" [(ngModel)]="book.categoryId" [disabled]="!editable">
                     <option *ngFor="#category of allCategories" [value]="category.id">{{ category.name }}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="title">Price</label>
-                <input type="text" class="form-control" [(ngModel)]="book.price" [disabled]="disabled">
+                <input type="text" class="form-control" [(ngModel)]="book.price" [disabled]="!editable">
             </div>
-            <button type="submit" class="btn btn-default" *ngIf="!disabled">Submit</button>
+            <button type="submit" class="btn btn-default" *ngIf="editable">Submit</button>
         </form>
     `,
     directives: [ COMMON_DIRECTIVES, FORM_DIRECTIVES ],
@@ -42,19 +42,20 @@ import {CategoryService} from "../services/category.service";
     providers: [ SplitPipe ]
 })
 export class BookFormComponent implements OnInit {
-    private book: Book = Book.empty();
+
     private allCategories: Category[] = [];
 
-    @Input() private isbn: string;
-    @Input() private disabled: boolean;
+    @Input() private book: Book;
+    @Input() private editable: boolean;
     @Output() private bookSubmit: EventEmitter<Book> = new EventEmitter();
 
-    constructor(private bookService: BookService, private categoryService: CategoryService, private splitPipe: SplitPipe) {
-        categoryService.getCategories().subscribe(categories => this.allCategories = categories);
-    }
+    constructor(
+        private categoryService: CategoryService,
+        private splitPipe: SplitPipe
+    ) { }
 
     ngOnInit() {
-        this.bookService.getBook(this.isbn).subscribe(book => this.book = book);
+        this.categoryService.getCategories().subscribe(categories => this.allCategories = categories);
     }
 
     onAuthorChange(author: string) {

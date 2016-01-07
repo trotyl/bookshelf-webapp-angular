@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
 import { RouteParams, Router } from "angular2/router";
 import { Http } from "angular2/http";
 import { BookFormComponent } from "./book-form.component";
@@ -10,30 +10,42 @@ import { Observable } from "rxjs/Rx";
     selector: 'book-edit',
     template: `
         <div class="page-header"><h2>Book Edit <small *ngIf="disabled">(Updating...)</small></h2></div>
-        <book-form [isbn]="isbn" [disabled]="disabled" (bookSubmit)="updateBook($event)"></book-form>
+        <book-form [book]="book" [editable]="editable" (bookSubmit)="updateBook($event)"></book-form>
     `,
     directives: [ BookFormComponent ]
 })
-export class BookEditComponent {
-    private isbn: string;
-    private disabled: boolean = false;
+export class BookEditComponent implements OnInit {
 
-    constructor(private router: Router, private routeParams: RouteParams, private bookService: BookService) {
-        this.isbn = routeParams.get('isbn');
+    private isbn: string;
+    private editable: boolean = false;
+    private book: Book = Book.empty();
+
+    constructor(
+        private router: Router,
+        private routeParams: RouteParams,
+        private bookService: BookService
+    ) { }
+
+    ngOnInit() {
+        this.isbn = this.routeParams.get('isbn');
+        this.bookService.getBook(this.isbn).subscribe(book => {
+            this.book = book;
+            this.editable = true;
+        });
     }
 
     updateBook(book: Book) {
-        this.disabled = true;
+        this.editable = false;
         this.bookService.updateBook(this.isbn, book).subscribe(response => {
             if (response.status >= 200 && response.status < 300) {
                 this.router.navigate(['BookDetail', { isbn: this.isbn }]);
             } else {
                 alert('Update book failed due to network problem!');
-                this.disabled = false;
+                this.editable = true;
             }
         }, response => {
             console.log(response.status);
-            this.disabled = false;
+            this.editable = true;
         });
     }
 }
