@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from 'angular2/core';
-import { Http, Response } from 'angular2/http';
+import { Http, Response, Headers } from 'angular2/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip-static';
@@ -65,7 +65,11 @@ export class BookService {
     }
 
     updateBook(isbn: string, book: Book): Observable<Response> {
-        return this.http.put(`/api/books/${isbn}`, book.toJson())
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        return this.http.put(`/api/books/${isbn}`, book.toJson(), { headers: headers})
             .do(() => {
                 this.getSingleBookOnline(book.isbn).subscribe();
                 isbn != book.isbn && this.checkBookExists(isbn);
