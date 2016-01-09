@@ -37,6 +37,9 @@ X-BookShelf-Type: Range<Status>
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
 X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
 ```
 
 Body Example:
@@ -81,6 +84,9 @@ X-BookShelf-Type: Range
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
 X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
 ```
 
 Body Example:
@@ -261,11 +267,13 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Range<Status>
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
 X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
 ```
 
 Body Example:
@@ -306,11 +314,13 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Range
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
 X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
 ```
 
 Body Example:
@@ -350,7 +360,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Status
 ```
 
@@ -385,7 +394,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Item
 ```
 
@@ -397,3 +405,166 @@ Body Example:
   "name": "Biographies & Memoirs"
 }
 ```
+
+### Range Author Status
+
+**Request Format:**
+
+Method Type:
+
+```
+GET
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/status" 
+      ["?" (("since=" AUTHOR-ID) / ("until=" AUTHOR-ID)) "&" ("count=" DIGITS) ]]
+```
+
+**Response Format:**
+
+Headers Example:
+
+```text
+X-BookShelf-Type: Range<Status>
+X-BookShelf-Since: 1
+X-BookShelf-Until: 2
+X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
+```
+
+Body Example:
+
+```json
+[
+  {
+    "id": 1,
+    "updated_at": 1452340843656
+  },
+  {
+    "id": 2,
+    "updated_at": 1452340843655
+  }
+]
+```
+
+### Range Author Items
+
+**Request Format:**
+
+Method Type:
+
+```
+GET
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors" 
+      ["?" (("since=" AUTHORS-ID) / ("until=" AUTHORS-ID)) "&" ("count=" DIGITS) ]]
+```
+
+**Response Format:**
+
+Headers Example:
+
+```text
+X-BookShelf-Type: Range
+X-BookShelf-Since: 1
+X-BookShelf-Until: 2
+X-BookShelf-Count: 2
+X-BookShelf-First: 1
+X-BookShelf-Last: 10
+X-BookShelf-Total: 8
+```
+
+Body Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Jeffrey Richter"
+  },
+  {
+    "id": 2,
+    "name": "Jon Skeet"
+  }
+]
+```
+
+### Single Author Status
+
+**Request Format:**
+
+Method Type:
+
+```
+GET
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/" AUTHOR-ID "/status"
+```
+
+**Response Format:**
+
+Headers Example:
+
+```text
+X-BookShelf-Type: Status
+```
+
+Body Example:
+
+```json
+{
+  "id": 1,
+  "updated_at": 1452340843656
+}
+```
+
+### Single Author Item
+
+**Request Format:**
+
+Method Type:
+
+```
+GET
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/" AUTHOR-ID
+```
+
+**Response Format:**
+
+Headers Example:
+
+```text
+X-BookShelf-Type: Item
+```
+
+Body Example:
+
+```json
+{
+  "id": 3,
+  "name": "Stanley B. Lippman"
+}
+```
+
