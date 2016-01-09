@@ -32,7 +32,7 @@ Uri Format:
 ```abnf
 URI = BASE 
       "/books/status" 
-      ["?" (("since=" BOOK-ID) / ("until=" BOOK-ID)) "&" ("count=" DIGITS) ]]
+      ["?" (("since=" BOOK-ID) / ("until=" BOOK-ID)) ["&" ("count=" DIGITS)] ]
 ```
 
 **Response Format:**
@@ -85,7 +85,7 @@ Uri Format:
 ```abnf
 URI = BASE 
       "/books" 
-      ["?" (("since=" BOOK-ID) / ("until=" BOOK-ID)) "&" ("count=" DIGITS) ]]
+      ["?" (("since=" BOOK-ID) / ("until=" BOOK-ID)) ["&" ("count=" DIGITS) ]]
 ```
 
 **Response Format:**
@@ -455,7 +455,7 @@ Uri Format:
 ```abnf
 URI = BASE 
       "/categories" 
-      ["?" (("since=" CATEGORY-ID) / ("until=" CATEGORY-ID)) "&" ("count=" DIGITS) ]]
+      ["?" (("since=" CATEGORY-ID) / ("until=" CATEGORY-ID)) ["&" ("count=" DIGITS) ]]
 ```
 
 **Response Format:**
@@ -686,7 +686,7 @@ Uri Format:
 ```abnf
 URI = BASE 
       "/authors/status" 
-      ["?" (("since=" AUTHOR-ID) / ("until=" AUTHOR-ID)) "&" ("count=" DIGITS) ]]
+      ["?" (("since=" AUTHOR-ID) / ("until=" AUTHOR-ID)) ["&" ("count=" DIGITS) ]]
 ```
 
 **Response Format:**
