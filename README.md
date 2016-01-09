@@ -33,7 +33,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Range<Status>
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
@@ -78,7 +77,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Range
 X-BookShelf-Since: 1
 X-BookShelf-Until: 2
@@ -138,7 +136,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Status
 ```
 
@@ -173,7 +170,6 @@ URI = BASE
 Headers Example:
 
 ```text
-X-BookShelf-Produced-At: 1452340843657
 X-BookShelf-Type: Item
 ```
 
@@ -188,6 +184,58 @@ Body Example:
   "categoryId": 1,
   "price": 43.74
 }
+```
+
+### Conditional Book Items
+
+**Request Format:**
+
+Method Type:
+
+```
+GET
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/books/"
+      "&query=" QUERY
+QUERY = <Legal bool expressing in javascript of '(data, i)' with urlencoded>
+        ; data.title.includes('C#') && data.price <= 60
+```
+
+**Response Format:**
+
+Headers Example:
+
+```text
+X-BookShelf-Type: Set
+X-BookShelf-Count: 2
+```
+
+Body Example:
+
+```json
+[
+  {
+    "id": 1,
+    "isbn": "9787302380979",
+    "title": "CLR via C#",
+    "authorIds": [1],
+    "categoryId": 1,
+    "price": 59.99
+  },
+  {
+    "id": 2,
+    "isbn": "9781617291340",
+    "title": "C# in Depth",
+    "authorIds": [2],
+    "categoryId": 1,
+    "price": 33.98
+  }
+]
 ```
 
 ### Range Category Status
