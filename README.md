@@ -8,7 +8,6 @@ A exercise of front-end part powered by angular2 of bookshelf project in Thought
 + `jQuery@2.*`
 + `RxJS@5.*`
 
----
 
 ## API Design
 
@@ -251,6 +250,42 @@ Body Example:
   }
 ]
 ```
+
+#### Create Book Item
+
+**Request Format:**
+
+Method Type:
+
+```
+POST
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/books/"
+```
+
+Body Example:
+
+```json
+{
+  "id": null,
+  "isbn": "9787302380979",
+  "title": "CLR via C#",
+  "authorIds": [1],
+  "categoryId": 1,
+  "price": 59.99
+}
+```
+
+**Response Format:**
+
+Status Code:
+
++ 201 for Success.
 
 ### Category Relevant
 
