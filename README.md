@@ -8,9 +8,17 @@ A exercise of front-end part powered by angular2 of bookshelf project in Thought
 + `jQuery@2.*`
 + `RxJS@5.*`
 
+---
+
 ## API Design
 
-### Range Book Status
+This is the just the ideal API interface provided.
+
+### Book Relevant
+
+There is something about book.
+
+#### Query Range Book Status
 
 **Request Format:**
 
@@ -57,7 +65,7 @@ Body Example:
 ]
 ```
 
-### Range Book Items
+#### Query Range Book Items
 
 **Request Format:**
 
@@ -120,7 +128,7 @@ Body Example:
 ]
 ```
 
-### Single Book Status
+#### Query Single Book Status
 
 **Request Format:**
 
@@ -154,7 +162,7 @@ Body Example:
 }
 ```
 
-### Single Book Item
+#### Query Single Book Item
 
 **Request Format:**
 
@@ -192,7 +200,7 @@ Body Example:
 }
 ```
 
-### Conditional Book Items
+#### Query Conditional Book Items
 
 **Request Format:**
 
@@ -244,7 +252,11 @@ Body Example:
 ]
 ```
 
-### Range Category Status
+### Category Relevant
+
+There is something about Category.
+
+#### Query Range Category Status
 
 **Request Format:**
 
@@ -291,7 +303,7 @@ Body Example:
 ]
 ```
 
-### Range Category Items
+#### Query Range Category Items
 
 **Request Format:**
 
@@ -338,7 +350,7 @@ Body Example:
 ]
 ```
 
-### Single Category Status
+#### Query Single Category Status
 
 **Request Format:**
 
@@ -372,7 +384,7 @@ Body Example:
 }
 ```
 
-### Single Category Item
+#### Query Single Category Item
 
 **Request Format:**
 
@@ -406,7 +418,11 @@ Body Example:
 }
 ```
 
-### Range Author Status
+### Author Relevant
+
+There is something about Author.
+
+#### Query Range Author Status
 
 **Request Format:**
 
@@ -453,7 +469,7 @@ Body Example:
 ]
 ```
 
-### Range Author Items
+#### Query Range Author Items
 
 **Request Format:**
 
@@ -500,7 +516,7 @@ Body Example:
 ]
 ```
 
-### Single Author Status
+#### Query Single Author Status
 
 **Request Format:**
 
@@ -534,7 +550,7 @@ Body Example:
 }
 ```
 
-### Single Author Item
+#### Query Single Author Item
 
 **Request Format:**
 
