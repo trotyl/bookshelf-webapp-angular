@@ -319,6 +319,70 @@ Status Code:
 201
 ```
 
+#### Update Book Item
+
+**Request Format:**
+
+Method Type:
+
+```
+PUT
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/books/" BOOK-ID
+```
+
+Body Example:
+
+```json
+{
+  "id": 9,
+  "isbn": "9787302380979",
+  "title": "CLR via C#",
+  "authorIds": [1],
+  "categoryId": 1,
+  "price": 59.99
+}
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
+
+#### Remove Book Item
+
+**Request Format:**
+
+Method Type:
+
+```
+DELETE
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/books/" BOOK-ID
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
+
+
 ### Category Relevant
 
 There is something about Category.
@@ -508,6 +572,100 @@ Body Example:
   "name": "Biographies & Memoirs"
 }
 ```
+
+#### Create Category Item
+
+**Request Format:**
+
+Method Type:
+
+```
+POST
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/categories/"
+```
+
+Body Example:
+
+```json
+{
+  "id": null,
+  "name": "Business & Money"
+}
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+201
+```
+
+#### Update Category Item
+
+**Request Format:**
+
+Method Type:
+
+```
+PUT
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/categories/" CATEGORY-ID
+```
+
+Body Example:
+
+```json
+{
+  "id": 5,
+  "name": "Business & Money"
+}
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
+
+#### Remove Category Item
+
+**Request Format:**
+
+Method Type:
+
+```
+DELETE
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/categories/" CATEGORY-ID
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
+
 
 ### Author Relevant
 
@@ -699,3 +857,96 @@ Body Example:
 }
 ```
 
+
+#### Create Author Item
+
+**Request Format:**
+
+Method Type:
+
+```
+POST
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/"
+```
+
+Body Example:
+
+```json
+{
+  "id": null,
+  "name": "Martin Fowler"
+}
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+201
+```
+
+#### Update Author Item
+
+**Request Format:**
+
+Method Type:
+
+```
+PUT
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/" AUTHOR-ID
+```
+
+Body Example:
+
+```json
+{
+  "id": 6,
+  "name": "Martin Fowler"
+}
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
+
+#### Remove Author Item
+
+**Request Format:**
+
+Method Type:
+
+```
+DELETE
+```
+
+Uri Format:
+
+```abnf
+URI = BASE 
+      "/authors/" AUTHOR-ID
+```
+
+**Response Format:**
+
+Status Code:
+
+```
+204
+```
