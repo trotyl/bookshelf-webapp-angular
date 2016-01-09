@@ -11,7 +11,7 @@ A exercise of front-end part powered by angular2 of bookshelf project in Thought
 
 ## API Design
 
-This is the just the ideal API interface provided.
+This is the just the ideal API interface of the back-end.
 
 ### Book Relevant
 
