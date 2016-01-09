@@ -37,6 +37,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -83,6 +89,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -146,6 +158,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -179,6 +197,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -220,6 +244,12 @@ QUERY = <Legal bool expressing in javascript of '(data, i)' with urlencoded>
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -285,7 +315,9 @@ Body Example:
 
 Status Code:
 
-+ 201 for Success.
+```
+201
+```
 
 ### Category Relevant
 
@@ -310,6 +342,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -358,6 +396,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -404,6 +448,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -437,6 +487,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -476,6 +532,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
@@ -524,6 +586,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -570,6 +638,12 @@ URI = BASE
 
 **Response Format:**
 
+Status Code:
+
+```
+200
+```
+
 Headers Example:
 
 ```text
@@ -603,6 +677,12 @@ URI = BASE
 ```
 
 **Response Format:**
+
+Status Code:
+
+```
+200
+```
 
 Headers Example:
 
