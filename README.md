@@ -239,7 +239,7 @@ Uri Format:
 URI = BASE 
       "/books/"
       "&query=" QUERY
-QUERY = <Legal bool expressing in javascript of '(data, i)' with urlencoded>
+QUERY = <Legal bool expressing in javascript of '(data, i)' without assignment in urlencoded>
         ; data.title.includes('C#') && data.price <= 60
 ```
 
