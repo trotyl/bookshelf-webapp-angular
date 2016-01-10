@@ -2,7 +2,7 @@ import { Model } from "./model";
 
 export class Category extends Model {
     constructor(
-        public id: string,
+        public id: number,
         public name: string
     ) { super(); }
 

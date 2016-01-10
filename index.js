@@ -95,6 +95,7 @@ var server = app.listen(3000, () => {
 
 var books = [
     {
+        "id": 0,
         "isbn": "9787302380979",
         "title": "CLR via C#",
         "author": ["Jeffrey Richter"],
@@ -102,6 +103,7 @@ var books = [
         "price": 59.99
     },
     {
+        "id": 1,
         "isbn": "9781617291340",
         "title": "C# in Depth",
         "author": ["Jon Skeet"],
@@ -109,6 +111,7 @@ var books = [
         "price": 33.98
     },
     {
+        "id": 2,
         "isbn": "9780321714114",
         "title": "C++ Primer",
         "author": ["Stanley B. Lippman", "Josée Lajoie", "Barbara E. Moo"],
@@ -116,6 +119,7 @@ var books = [
         "price": 43.74
     },
     {
+        "id": 3,
         "isbn": "8601300201986",
         "title": "Effective Java",
         "author": ["Joshua Bloch"],
@@ -123,6 +127,7 @@ var books = [
         "price": 29.69
     },
     {
+        "id": 4,
         "isbn": "9780596009205",
         "title": "Head First Java",
         "author": ["Kathy Sierra", "Bert Bates"],
@@ -130,18 +135,21 @@ var books = [
         "price": 26.07
     },
     {
+        "id": 5,
         "isbn": "9781491927069",
         "title": "C# 6.0 in a Nutshell: The Definitive Reference",
         "author": ["Joseph Albahari", "Ben Albahari"],
         "categoryId": "0",
         "price": 59.99 },
     {
+        "id": 6,
         "isbn": "9781449343507",
         "title": "Head First C#",
         "author": ["Kathy Sierra"],
         "categoryId": "0",
         "price": 54.99 },
     {
+        "id": 7,
         "isbn": "9781491921463",
         "title": "C# 6.0 Cookbook",
         "author": ["Jay Hilyard", "Stephen Teilhet"],
@@ -149,6 +157,7 @@ var books = [
         "price": 54.99
     },
     {
+        "id": 8,
         "isbn": "9781491901632",
         "title": "Hadoop: The Definitive Guide",
         "author": ["Tom White"],
@@ -156,6 +165,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 9,
         "isbn": "9780596517748",
         "title": "JavaScript: The Good Parts",
         "author": ["Douglas Crockford"],
@@ -170,6 +180,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 10,
         "isbn": "9781449355739",
         "title": "Learning Python",
         "author": ["Mark Lutz"],
@@ -177,6 +188,7 @@ var books = [
         "price": 64.99
     },
     {
+        "id": 11,
         "isbn": "9781449359362",
         "title": "Introducing Python: Modern Computing in Simple Packages",
         "author": ["Bill Lubanovic"],
@@ -184,6 +196,7 @@ var books = [
         "price": 39.99
     },
     {
+        "id": 12,
         "isbn": "9780596516178",
         "title": "The Ruby Programming Language",
         "author": ["David Flanagan", "Yukihiro Matsumoto"],
@@ -191,6 +204,7 @@ var books = [
         "price": 39.99
     },
     {
+        "id": 13,
         "isbn": "9781449372651",
         "title": "Head First Ruby",
         "author": ["Jay McGavren"],
@@ -198,6 +212,7 @@ var books = [
         "price": 44.99
     },
     {
+        "id": 14,
         "isbn": "9781491936771",
         "title": "iOS 9 Programming Fundamentals with Swift: Swift, Xcode, and Cocoa Basics",
         "author": ["Matt Neuburg"],
@@ -205,6 +220,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 15,
         "isbn": "9781491936856",
         "title": "Programming iOS 9: Dive Deep into Views, View Controllers, and Frameworks",
         "author": ["Matt Neuburg"],
@@ -212,6 +228,7 @@ var books = [
         "price": 54.99
     },
     {
+        "id": 16,
         "isbn": "9780134171456",
         "title": "Android Programming: The Big Nerd Ranch Guide",
         "author": ["Bill Phillips", "Chris Stewart", "Brian Hardy", "Kristin Marsicano"],
@@ -219,6 +236,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 17,
         "isbn": "9780201633610",
         "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
         "author": ["Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides", "Grady Booch"],
@@ -226,6 +244,7 @@ var books = [
         "price": 59.99
     },
     {
+        "id": 18,
         "isbn": "0000596007124",
         "title": "Head First Design Patterns",
         "author": ["Eric Freeman", "Bert Bates", "Kathy Sierra", "Elisabeth Robson"],
@@ -233,6 +252,7 @@ var books = [
         "price": 59.99
     },
     {
+        "id": 19,
         "isbn": "9781933988924",
         "title": "Real-World Functional Programming: With Examples in F# and C#",
         "author": ["Tomas Petricek", "Jon Skeet"],
@@ -240,6 +260,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 20,
         "isbn": "9781491949856",
         "title": "Programming Scala: Scalability = Functional Programming + Objects",
         "author": ["Dean Wampler", "Alex Payne"],
@@ -247,6 +268,7 @@ var books = [
         "price": 49.99
     },
     {
+        "id": 21,
         "isbn": "9781934356807",
         "title": "The Cucumber Book: Behaviour-Driven Development for Testers and Developers",
         "author": ["Matt Wynne", "Aslak Hellesoy"],
@@ -254,6 +276,7 @@ var books = [
         "price": 30.00
     },
     {
+        "id": 22,
         "isbn": "9780201485677",
         "title": "Refactoring: Improving the Design of Existing Code",
         "author": ["Martin Fowler", "Kent Beck", "John Brant", "William Opdyke", "Don Roberts", "Erich Gamma"],
@@ -264,43 +287,43 @@ var books = [
 
 var categories = [
     { 
-        "id": "0",
+        "id": 0,
         "name": "Computer & Technology" 
     },
     {
-        "id": "1",
+        "id": 1,
         "name": "Arts & Photography"
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Biographies & Memoirs"
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Business & Money"
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Christian Books & Bibles"
     },
     {
-        "id": "5",
+        "id": 5,
         "name": "Comics & Graphic Novels"
     },
     {
-        "id": "6",
+        "id": 6,
         "name": "Cookbooks, Food & Wine"
     },
     {
-        "id": "7",
+        "id": 7,
         "name": "Crafts, Hobbies & Home"
     },
     {
-        "id": "8",
+        "id": 8,
         "name": "Education & Teaching"
     },
     {
-        "id": "9",
+        "id": 9,
         "name": "Engineering & Transportation"
     }
 ];

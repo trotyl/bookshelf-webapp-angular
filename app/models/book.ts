@@ -3,6 +3,7 @@ import { Model } from "./model";
 
 export class Book extends Model {
     constructor(
+        public id: number,
         public isbn: string,
         public title: string,
         public author: string[],
@@ -11,10 +12,10 @@ export class Book extends Model {
     ) { super(); }
 
     static empty(): Book {
-        return new Book(null, null, [], null, null);
+        return new Book(null, null, null, [], null, null);
     }
 
-    static from({ isbn: isbn, title: title, author: author, categoryId: categoryId, price: price}): Book {
-        return new Book(isbn, title, author, categoryId, price);
+    static from({ id: id, isbn: isbn, title: title, author: author, categoryId: categoryId, price: price}): Book {
+        return new Book(id, isbn, title, author, categoryId, price);
     }
 }

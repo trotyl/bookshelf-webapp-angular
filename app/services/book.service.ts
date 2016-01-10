@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from 'angular2/core';
 import { Http, Response, Headers } from 'angular2/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip-static';
 import 'rxjs/add/operator/mergeMap';
@@ -51,6 +51,7 @@ export class BookService {
     }
 
     get(isbn: string) {
+        let subject: Subject<Book> = new Subject<Book>();
         return this.getOffine(isbn)
             .catch(() => this.getOnline(isbn));
     }
