@@ -11,7 +11,7 @@ export class Category extends Model {
     }
 
     constructor(
-        public id: number,
+        id: number,
         public name: string
-    ) { super(); }
+    ) { super(id); }
 }

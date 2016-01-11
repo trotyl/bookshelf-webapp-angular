@@ -20,7 +20,7 @@ import { CategoryService } from "../services/category.service";
             </div>
             <div class="form-group">
                 <label for="title">Author</label>
-                <input type="text" class="form-control" [ngModel]="book.author | list" (ngModelChange)="onAuthorChange($event)" [disabled]="!editable">
+                <p>Currently trying.</p>
             </div>
             <div class="form-group">
                 <label for="title">Category</label>
@@ -56,8 +56,4 @@ export class BookFormComponent implements OnInit {
         this.categoryService.gets().subscribe(categories => this.allCategories = categories);
     }
 
-    onAuthorChange(author: string) {
-        this.book.author = this.splitPipe.transform(author, [',', true]);
-        console.log(this.book.author);
-    }
 }

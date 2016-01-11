@@ -4,11 +4,11 @@ import {Author} from "./author";
 
 export class Book extends Model {
 
-    private static empty = new Book(null, null, null, [], null, null);
-    private static loading = new Book(null, 'loading...', 'loading...', [], null, null);
+    private static _empty = new Book(null, null, null, [], null, null);
+    private static _loading = new Book(null, 'loading...', 'loading...', [], null, null);
 
     static empty(): Book {
-        return Book.empty;
+        return Book._empty;
     }
 
     static from({ id: id, isbn: isbn, title: title, author: author, categoryId: categoryId, price: price}): Book {
@@ -16,15 +16,15 @@ export class Book extends Model {
     }
 
     static loading(): Book {
-        return Book.loading;
+        return Book._loading;
     }
 
     constructor(
-        public id: number,
+        id: number,
         public isbn: string,
         public title: string,
         public authorIds: number[],
         public categoryId: string,
         public price: number
-    ) { super(); }
+    ) { super(id); }
 }
