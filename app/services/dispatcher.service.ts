@@ -2,19 +2,8 @@ import { Injectable } from 'angular2/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs/Rx";
 import * as _ from "lodash";
 import {Model} from "../models/model";
-
-
-class Cacher<T> {
-    gets<T>(type: any, ids: number[]): Observable<T[]> {
-        return null;
-    }
-}
-class Fetcher<T> {
-    gets<T>(type: any, ids: number[]): Observable<T[]> {
-        return null;
-    }
-}
-
+import {Cacher} from "./cacher.service";
+import {Fetcher} from "./fetcher.service";
 
 @Injectable()
 export class Dispatcher<T extends Model> {
