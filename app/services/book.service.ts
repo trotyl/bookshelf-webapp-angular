@@ -10,6 +10,7 @@ import 'rxjs/add/observable/throw';
 import { Book } from "../models/models";
 import { Category } from '../models/category';
 import { CategoryService } from './category.service';
+import {BehaviorSubject} from "rxjs/Rx";
 
 @Injectable()
 export class BookService {
@@ -51,7 +52,6 @@ export class BookService {
     }
 
     get(isbn: string) {
-        let subject: Subject<Book> = new Subject<Book>();
         return this.getOffine(isbn)
             .catch(() => this.getOnline(isbn));
     }
