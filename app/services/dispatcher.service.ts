@@ -23,8 +23,8 @@ export class Dispatcher<T extends Model> {
                 subject.next(currentItems);
             })
             .do(items => this.fetcher.gets<T>(type, items.map((item, i) => ({ item: item, i: i } ))
-                                                           .filter(tuple => !tuple.item)
-                                                           .map(tuple => ids[tuple.i]))
+                                                         .filter(tuple => !tuple.item)
+                                                         .map(tuple => ids[tuple.i]))
                              .do(items => {
                                  currentItems = _.clone(currentItems);
                                  items.forEach(item => item && (currentItems[ids.indexOf(item.id)] = item));
