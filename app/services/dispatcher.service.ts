@@ -13,7 +13,7 @@ export class Dispatcher<T extends Model> {
         private fetcher: Fetcher<T>
     ) { }
 
-    get(type: any, ids: number[]) {
+    gets(type: any, ids: number[]) {
         let currentItems: T[] = new Array(ids.length).fill(type.loading());
         let subject: Subject<T[]> = new BehaviorSubject<T[]>(currentItems);
         this.cacher.gets<T>(type, ids)
